@@ -1,8 +1,8 @@
+import 'package:circle/core/navigator/navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:go_router/go_router.dart';
 
-import '../../login/views/login_view.dart';
+import '../../login/login_view.dart';
 
 class SplashCartLogo extends StatefulWidget {
   const SplashCartLogo({super.key});
@@ -55,7 +55,7 @@ class _SplashCartLogoState extends State<SplashCartLogo>
     });
     _cart1AnimationController.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
-        GoRouter.of(context).pushReplacement(LoginView.rn);
+        NavigatorHandler.push(LoginView());
       }
     });
   }

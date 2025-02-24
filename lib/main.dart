@@ -1,20 +1,28 @@
+import 'package:circle/core/app_theme/app_colors.dart';
+import 'package:circle/injection.dart';
+import 'package:circle/multiproviders.dart';
+import 'package:circle/presentation/views/splash/views/splash_view.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-import 'core/config/constants.dart';
-import 'core/services/navigation_service.dart';
-import 'generated/codegen_loader.g.dart';
+import 'core/constants/constants.dart';
+import 'presentation/views/main/main_view.dart';
+
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+  await init();
   runApp(
-    EasyLocalization(
-      supportedLocales: Constants.langs,
-      path: 'assets/translations',
-      fallbackLocale: Constants.langs.first,
-      assetLoader: CodegenLoader(),
-      child: MyApp(),
+    GenerateMultiProviders(
+      child: EasyLocalization(
+        supportedLocales: Constants.langs,
+        path: 'assets/translations',
+        fallbackLocale: Constants.langs[1],
+        startLocale: Constants.langs.first,
+        child: MyApp(),
+      ),
     ),
   );
 }
@@ -23,16 +31,21 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
+    return MaterialApp(
       title: 'Circle',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        scaffoldBackgroundColor: AppColors.white,
+        appBarTheme: AppBarTheme(
+          backgroundColor: AppColors.white,
+        ),
         fontFamily: 'MadaniArabic',
       ),
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
-      routerConfig: NavigationService.router,
+      navigatorKey: navigatorKey,
+      home: SplashView(),
     );
   }
 }

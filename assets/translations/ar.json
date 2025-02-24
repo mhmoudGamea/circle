@@ -1,5 +1,67 @@
 {
     "login": {
-        "appBarTitle": "تواصل معنا"
+        "title": "اهلا بك..!",
+        "subTitle": "سجل الدخول في التطبيق واطلب الان..",
+        "textFieldCountry": "ادخل الدولة",
+        "textFieldPhone": "رقم الجوال",
+        "textFieldRequired": "هذا الحقل مطلوب",
+        "textFieldNotValid": "رقم الجوال غير صحيح",
+        "buttonTitle": "دخول"
+    },
+    "otp": {
+        "title": " من فضلك ادخل رمز التحقق المرسل الي رقم الجوال",
+        "resendOtp": "اعادة ارسال الرمز",
+        "buttonTitle": "تأكيد"
+    },
+    "signup": {
+        "createAccount": "انشاء حساب",
+        "textFieldFirstName": "الاسم الاول",
+        "textFieldLastName": "الاسم الاخير",
+        "textFieldCity": "المدينة",
+        "checkBox": "مدعو بواسطة مستخدم ؟",
+        "textFieldRequired": "هذا الحقل مطلوب",
+        "buttonTitle": "تأكيد"
+    },
+    "home": {
+        "appBarTitle": "الصفحه الرئيسيه"
+    },
+    "component": {
+        "appBarTitle": "الاقسام"
+    },
+    "profile": {
+        "appBarTitle": "المزيد",
+        "name": "الاسم",
+        "myOrders": "طلباتي",
+        "favorites": "المفضلة",
+        "points": "النقاط",
+        "settings": "الاعدادات",
+        "editProfile": "تعديل الحساب",
+        "language": "اللغة",
+        "contactWithUs": "تواصل معنا",
+        "aboutApp": "عن التطبيق",
+        "rateApp": "تقييم التطبيق",
+        "deleteAccount": "حذف الحساب",
+        "logout": "تسجيل الخروج",
+        "languageButton": "تأكيد"
+    },
+    "contact_us": {
+        "appBarTitle": "تواصل معنا",
+        "textFieldName": "الاسم",
+        "textFieldEmail": "البريد الالكتروني",
+        "textFieldMessageAddress": "عنوان الرساله",
+        "textFieldMessage": "الرساله",
+        "textFieldRequired": "هذا الحقل مطلوب",
+        "buttonTitle": "ارسال"
+    },
+    "about_app": {
+        "appBarTitle": "عن التطبيق",
+        "whoWeAre": "من نحن",
+        "description": "هو ببساطة نص شكلي (بمعنى أن الغاية هي الشكل وليس المحتوى) ويُستخدم في صناعات المطابع ودور النشر. كان لوريم إيبسوم ولايزال المعيار للنص الشكلي منذ القرن الخامس عشر عندما قامت مطبعة مجهولة برص مجموعة من الأحرف بشكل عشوائي أخذتها من نص"
+    },
+    "modify_account": {
+        "appBarTitle": "تعديل الحساب",
+        "textFieldFirstName": "الاسم الاول",
+        "textFieldLastName": "الاسم الاخير",
+        "buttonTitle": "تأكيد"
     }
 }

@@ -1,5 +1,67 @@
 {
     "login": {
-        "appBarTitle": "Contact Us"
+        "title": "Welcome..!",
+        "subTitle": "Login to the app and order now..",
+        "textFieldCountry": "Enter country",
+        "textFieldPhone": "Phone number",
+        "textFieldRequired": "This field is required",
+        "textFieldNotValid": "Phone number is not valid",
+        "buttonTitle": "Enter"
+    },
+    "otp": {
+        "title": "Please re-enter otp code that we send to mobile number ",
+        "resendOtp": "Resend otp code",
+        "buttonTitle": "Confirm"
+    },
+    "signup": {
+        "createAccount": "Create Account",
+        "textFieldFirstName": "First Name",
+        "textFieldLastName": "Last Name",
+        "textFieldCity": "City",
+        "checkBox": "Invited by a user ?",
+        "textFieldRequired": "This field is required",
+        "buttonTitle": "Confirm"
+    },
+    "home": {
+        "appBarTitle": "Home"
+    },
+    "component": {
+        "appBarTitle": "Sections"
+    },
+    "profile": {
+        "appBarTitle": "More",
+        "name": "Name",
+        "myOrders": "My Orders",
+        "favorites": "Favorites",
+        "points": "Points",
+        "settings": "Settings",
+        "editProfile": "Edit Profile",
+        "language": "Language",
+        "contactWithUs": "Contact Us",
+        "aboutApp": "About App",
+        "rateApp": "Rate App",
+        "deleteAccount": "Delete Account",
+        "logout": "Logout",
+        "languageButton": "Confirm"
+    },
+    "contact_us": {
+        "appBarTitle": "Contact Us",
+        "textFieldName": "Name",
+        "textFieldEmail": "Email",
+        "textFieldMessageAddress": "Message Address",
+        "textFieldMessage": "Message",
+        "textFieldRequired": "This field is required",
+        "buttonTitle": "Send"
+    },
+    "about_app": {
+        "appBarTitle": "About the App",
+        "whoWeAre": "Who We Are",
+        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+    },
+    "modify_account": {
+        "appBarTitle": "Modify Account",
+        "textFieldFirstName": "First Name",
+        "textFieldLastName": "Last Name",
+        "buttonTitle": "Confirm"
     }
 }
