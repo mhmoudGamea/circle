@@ -47,7 +47,11 @@ class SignupProvider extends ImagePickerService with ChangeNotifier {
       _lastNameEditingController;
 
   // city drop down menu
-  static final List<String> _cities = ['Cairo', 'Menofia', 'Alexandria'];
+  static final List<String> _cities = [
+    'dropDownCity.city0',
+    'dropDownCity.city1',
+    'dropDownCity.city2'
+  ];
 
   List<String> get cities => [..._cities];
 

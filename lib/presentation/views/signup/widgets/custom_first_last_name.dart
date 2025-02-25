@@ -1,3 +1,4 @@
+import 'package:circle/core/extensions/num_extensions.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -20,6 +21,7 @@ class CustomFirstLastName extends StatelessWidget {
             child: CustomTextForm(
               label: 'signup.textFieldFirstName',
               controller: signupProvider.firstNameEditingController,
+              height: 70.h,
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'signup.textFieldRequired'.tr();
@@ -33,6 +35,7 @@ class CustomFirstLastName extends StatelessWidget {
             child: CustomTextForm(
               label: 'signup.textFieldLastName',
               controller: signupProvider.lastNameEditingController,
+              height: 70.h,
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'signup.textFieldRequired'.tr();

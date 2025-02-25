@@ -13,13 +13,17 @@ class MainView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<MainProvider>(
       builder: (_, provider, child) => Scaffold(
-        appBar: CustomAppBar(
-          showToolBar: true,
-          title: provider.appBarTitle().tr(),
-        ),
-        body: IndexedStack(
-          index: provider.currentIndex,
-          children: provider.views,
+        appBar: provider.currentIndex == 0
+            ? null
+            : CustomAppBar(
+                showToolBar: true,
+                title: provider.appBarTitle().tr(),
+              ),
+        body: SafeArea(
+          child: IndexedStack(
+            index: provider.currentIndex,
+            children: provider.views,
+          ),
         ),
         bottomNavigationBar: CustomBottomNavBar(),
       ),

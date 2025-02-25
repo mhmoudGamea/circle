@@ -1,7 +1,8 @@
-import 'package:circle/presentation/views/components/component_view.dart';
-import 'package:circle/presentation/views/home/home_view.dart';
-import 'package:circle/presentation/views/profile/profile_view.dart';
 import 'package:flutter/material.dart';
+
+import '../../views/components/component_view.dart';
+import '../../views/home/home_view.dart';
+import '../../views/profile/profile_view.dart';
 
 class MainProvider extends ChangeNotifier {
   final List<Widget> _views = [
@@ -12,7 +13,7 @@ class MainProvider extends ChangeNotifier {
 
   List<Widget> get views => [..._views];
 
-  int _currentIndex = 2;
+  int _currentIndex = 0;
 
   int get currentIndex => _currentIndex;
 
@@ -24,7 +25,7 @@ class MainProvider extends ChangeNotifier {
   // return appBarTitle based on current index
   String appBarTitle() {
     if (currentIndex == 0) {
-      return 'home.appBarTitle';
+      return 'home.appBar.welcome';
     } else if (_currentIndex == 1) {
       return 'component.appBarTitle';
     } else {

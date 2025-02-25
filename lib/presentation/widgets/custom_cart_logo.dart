@@ -4,8 +4,19 @@ import 'package:flutter_svg/flutter_svg.dart';
 class CustomCartLogo extends StatelessWidget {
   final Color lineColor;
   final Color cartColor;
-  const CustomCartLogo(
-      {super.key, required this.lineColor, required this.cartColor});
+  final double? cartWidth;
+  final double? cartHeight;
+  final double? lineWidth;
+  final double? lineHeight;
+  const CustomCartLogo({
+    super.key,
+    required this.lineColor,
+    required this.cartColor,
+    this.cartWidth,
+    this.cartHeight,
+    this.lineWidth,
+    this.lineHeight,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +34,12 @@ class CustomCartLogo extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: List.generate(
                       3,
-                      (index) => SvgPicture.asset('assets/images/svg/bg1.svg',
-                          color: lineColor),
+                      (index) => SvgPicture.asset(
+                        'assets/images/svg/bg1.svg',
+                        color: lineColor,
+                        width: lineWidth,
+                        height: lineHeight,
+                      ),
                     ),
                   ),
                 ),
@@ -32,8 +47,12 @@ class CustomCartLogo extends StatelessWidget {
             ),
             Align(
               alignment: Alignment.center,
-              child: SvgPicture.asset('assets/images/svg/cart_logo.svg',
-                  color: cartColor),
+              child: SvgPicture.asset(
+                'assets/images/svg/cart_logo.svg',
+                color: cartColor,
+                width: cartWidth,
+                height: cartHeight,
+              ),
             ),
           ],
         ),

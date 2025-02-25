@@ -13,6 +13,11 @@
         "resendOtp": "اعادة ارسال الرمز",
         "buttonTitle": "تأكيد"
     },
+    "dropDownCity": {
+        "city0": "القاهره",
+        "city1": "الجيزة",
+        "city2": "الاسكندرية"
+    },
     "signup": {
         "createAccount": "انشاء حساب",
         "textFieldFirstName": "الاسم الاول",
@@ -23,7 +28,11 @@
         "buttonTitle": "تأكيد"
     },
     "home": {
-        "appBarTitle": "الصفحه الرئيسيه"
+        "appBar": {
+            "welcome": "أهلا وسهلا",
+            "name": "الاسم"
+        },
+        "searchField": "منتج معين...؟"
     },
     "component": {
         "appBarTitle": "الاقسام"

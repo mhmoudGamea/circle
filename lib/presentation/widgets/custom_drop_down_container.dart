@@ -1,3 +1,4 @@
+import 'package:circle/core/extensions/num_extensions.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/app_theme/app_colors.dart';
@@ -22,7 +23,7 @@ class CustomDropDownContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: width ?? double.infinity,
-      height: height ?? 60,
+      height: height ?? 56.h,
       padding: EdgeInsets.symmetric(horizontal: Constants.border),
       alignment: Alignment.center,
       decoration: BoxDecoration(

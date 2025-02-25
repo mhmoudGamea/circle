@@ -12,5 +12,6 @@ abstract class AppColors {
   static const white = Color(0xffFFFFFF);
   // profile background cover color
   static const coverColor = Color(0xffF6F6F6);
-  // custom button icon
+  // custom button icon color
+  static const iconColor = Color(0xffEEEEEE);
 }

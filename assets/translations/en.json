@@ -13,6 +13,11 @@
         "resendOtp": "Resend otp code",
         "buttonTitle": "Confirm"
     },
+    "dropDownCity": {
+        "city0": "Cairo",
+        "city1": "Giza",
+        "city2": "Alexandria"
+    },
     "signup": {
         "createAccount": "Create Account",
         "textFieldFirstName": "First Name",
@@ -23,7 +28,11 @@
         "buttonTitle": "Confirm"
     },
     "home": {
-        "appBarTitle": "Home"
+        "appBar": {
+            "welcome": "Welcome",
+            "name": "Name"
+        },
+        "searchField": "Specific product...?"
     },
     "component": {
         "appBarTitle": "Sections"

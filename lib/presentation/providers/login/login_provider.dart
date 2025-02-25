@@ -33,13 +33,14 @@ class LoginProvider extends ChangeNotifier {
   }
 
   // phone text form field
-  final TextEditingController _controller = TextEditingController();
+  final TextEditingController _phoneNumberController = TextEditingController();
 
-  TextEditingController get controller => _controller;
+  TextEditingController get phoneNumberController => _phoneNumberController;
 
   // validation
   bool validate() {
-    if (_formKey.currentState!.validate() && _controller.text.length == 11) {
+    if (_formKey.currentState!.validate() &&
+        _phoneNumberController.text.length == 11) {
       _formKey.currentState!.save();
       return true;
     } else {

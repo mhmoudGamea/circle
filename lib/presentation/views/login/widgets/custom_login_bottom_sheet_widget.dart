@@ -12,7 +12,8 @@ import '../../../widgets/custom_button.dart';
 import '../../../widgets/custom_pin_code_field.dart';
 
 class CustomLoginBottomSheetWidget extends StatelessWidget {
-  const CustomLoginBottomSheetWidget({super.key});
+  final String phoneNumber;
+  const CustomLoginBottomSheetWidget({super.key, required this.phoneNumber});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class CustomLoginBottomSheetWidget extends StatelessWidget {
         SvgPicture.asset('assets/images/svg/otp.svg'),
         SizedBox(height: 16),
         Text(
-          '${'otp.title'.tr()} ****************',
+          '${'otp.title'.tr()}\n$phoneNumber',
           style: AppStyles.b14,
           textAlign: TextAlign.center,
         ),
