@@ -19,7 +19,7 @@ class DropDownCityButton extends StatelessWidget {
           child!,
           Expanded(
             child: DropdownButton(
-              value: provider.cities.first,
+              value: provider.newCity,
               underline: SizedBox(),
               isExpanded: true,
               icon: Icon(
@@ -39,7 +39,7 @@ class DropDownCityButton extends StatelessWidget {
                   )
                   .toList(),
               onChanged: (value) {
-                // provider.changeCity(value!);
+                provider.changeCity(value!);
               },
             ),
           ),

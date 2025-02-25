@@ -32,9 +32,17 @@
             "welcome": "Welcome",
             "name": "Name"
         },
-        "searchField": "Specific product...?"
+        "searchField": "Specific product...?",
+        "Sections": {
+            "title": "Sections",
+            "viewAll": "View All"
+        },
+        "offers": {
+            "title": "Latest Products",
+            "viewAll": "View All"
+        }
     },
-    "component": {
+    "Sections": {
         "appBarTitle": "Sections"
     },
     "profile": {

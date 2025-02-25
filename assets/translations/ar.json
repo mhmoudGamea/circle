@@ -32,9 +32,17 @@
             "welcome": "أهلا وسهلا",
             "name": "الاسم"
         },
-        "searchField": "منتج معين...؟"
+        "searchField": "منتج معين...؟",
+        "Sections": {
+            "title": "الاقسام",
+            "viewAll": "عرض الكل"
+        },
+        "offers": {
+            "title": "احدث المنتجات",
+            "viewAll": "عرض الكل"
+        }
     },
-    "component": {
+    "Sections": {
         "appBarTitle": "الاقسام"
     },
     "profile": {

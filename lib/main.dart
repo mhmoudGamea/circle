@@ -2,7 +2,6 @@ import 'package:circle/core/app_theme/app_colors.dart';
 import 'package:circle/injection.dart';
 import 'package:circle/multiproviders.dart';
 import 'package:circle/presentation/views/main/main_view.dart';
-import 'package:circle/presentation/views/splash/views/splash_view.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
