@@ -27,7 +27,7 @@ class MainProvider extends ChangeNotifier {
     if (currentIndex == 0) {
       return 'home.appBar.welcome';
     } else if (_currentIndex == 1) {
-      return 'component.appBarTitle';
+      return 'Categories.appBarTitle';
     } else {
       return 'profile.appBarTitle';
     }

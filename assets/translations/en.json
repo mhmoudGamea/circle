@@ -33,8 +33,8 @@
             "name": "Name"
         },
         "searchField": "Specific product...?",
-        "Sections": {
-            "title": "Sections",
+        "categories": {
+            "title": "Categories",
             "viewAll": "View All"
         },
         "offers": {
@@ -42,8 +42,8 @@
             "viewAll": "View All"
         }
     },
-    "Sections": {
-        "appBarTitle": "Sections"
+    "Categories": {
+        "appBarTitle": "Categories"
     },
     "profile": {
         "appBarTitle": "More",

@@ -1,4 +1,8 @@
+import 'package:circle/data/models/home/categories/categories_model.dart';
+import 'package:circle/data/models/home/latest_products/latest_products_model.dart';
 import 'package:circle/presentation/providers/home/home_provider.dart';
+import 'package:circle/presentation/views/home/widgets/categories_grid.dart';
+import 'package:circle/presentation/views/home/widgets/latest_products_grid.dart';
 import 'package:circle/presentation/widgets/custom_carousel_slider.dart';
 import 'package:circle/presentation/widgets/custom_header.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -16,30 +20,45 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: Dimens.padding_16h),
-      child: Column(
-        children: [
-          SizedBox(height: Dimens.padding_8h),
-          HomeAppBar(),
-          SizedBox(height: Dimens.padding_8h),
-          CitySearchBar(),
-          SizedBox(height: Dimens.padding_16h),
-          CustomCarouselSlider(
-              carouselList: context.read<HomeProvider>().images),
-          SizedBox(height: Dimens.padding_24h),
-          CustomHeader(
-            leading: 'home.Sections.title'.tr(),
-            trailing: 'home.Sections.viewAll'.tr(),
-            trailingOnTap: () {},
+      child: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
+            child: Column(
+              children: [
+                SizedBox(height: Dimens.padding_8h),
+                HomeAppBar(),
+                SizedBox(height: Dimens.padding_16h),
+                CitySearchBar(),
+                SizedBox(height: Dimens.padding_16h),
+                CustomCarouselSlider(
+                    carouselList: context.read<HomeProvider>().images),
+                SizedBox(height: Dimens.padding_24h),
+                CustomHeader(
+                  leading: 'home.categories.title'.tr(),
+                  trailing: 'home.categories.viewAll'.tr(),
+                  trailingOnTap: () {},
+                ),
+                SizedBox(height: Dimens.padding_12h),
+              ],
+            ),
           ),
           // sections grid view
-          CustomHeader(
-            leading: 'home.offers.title'.tr(),
-            trailing: 'home.offers.viewAll'.tr(),
-            trailingOnTap: () {
-              print('hello extension');
-            },
+          CategoriesGrid(model: CategoriesModel.categoriesModel.subCategories),
+          SliverToBoxAdapter(
+            child: Column(
+              children: [
+                CustomHeader(
+                  leading: 'home.offers.title'.tr(),
+                  trailing: 'home.offers.viewAll'.tr(),
+                  trailingOnTap: () {},
+                ),
+                SizedBox(height: Dimens.padding_12h),
+              ],
+            ),
           ),
           // offer grid view
+          LatestProductsGrid(
+              latestProductsModel: LatestProductsModel.dummyData),
         ],
       ),
     );

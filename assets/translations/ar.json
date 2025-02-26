@@ -33,7 +33,7 @@
             "name": "الاسم"
         },
         "searchField": "منتج معين...؟",
-        "Sections": {
+        "categories": {
             "title": "الاقسام",
             "viewAll": "عرض الكل"
         },
@@ -42,7 +42,7 @@
             "viewAll": "عرض الكل"
         }
     },
-    "Sections": {
+    "Categories": {
         "appBarTitle": "الاقسام"
     },
     "profile": {

@@ -29,6 +29,12 @@ abstract class AppStyles {
     color: Colors.black,
   );
 
+  static const b12 = TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.w700,
+    color: Colors.black,
+  );
+
   static const b13 = TextStyle(
     fontSize: 13,
     fontWeight: FontWeight.w700,
