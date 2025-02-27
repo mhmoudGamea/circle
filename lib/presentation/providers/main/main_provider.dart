@@ -5,6 +5,7 @@ import '../../views/home/home_view.dart';
 import '../../views/profile/profile_view.dart';
 
 class MainProvider extends ChangeNotifier {
+  // list of views that i have in bottom nav bar
   final List<Widget> _views = [
     HomeView(),
     ComponentView(),
@@ -20,6 +21,16 @@ class MainProvider extends ChangeNotifier {
   void changeIndex(int index) {
     _currentIndex = index;
     notifyListeners();
+  }
+
+  // Sets the selected grid item index and navigates to the ComponentView.
+
+  int _selectedIndex = -1;
+
+  int get selectedIndex => _selectedIndex;
+  void setSelectedGridItemIndex(int index) {
+    _selectedIndex = index;
+    changeIndex(1);
   }
 
   // return appBarTitle based on current index

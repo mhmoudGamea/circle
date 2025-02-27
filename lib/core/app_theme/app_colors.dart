@@ -15,4 +15,7 @@ abstract class AppColors {
   // custom button icon color
   static const iconColor = Color(0xffEEEEEE);
   static const favIconColor = Color(0xffBCBCBC);
+  // components navigation rail
+  static const navRailBackgroundColor = Color(0xffF9F9F9);
+  static const navRailBackgroundButtonColor = Color(0x0DDF1C26);
 }

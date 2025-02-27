@@ -52,7 +52,6 @@ class CustomBottomCover extends StatelessWidget {
                   },
                   confirm: () {
                     context.read<ProfileProvider>().changeLanguage(context);
-                    NavigatorHandler.pop();
                   },
                 ),
               );
@@ -81,7 +80,9 @@ class CustomBottomCover extends StatelessWidget {
           ),
           SizedBox(height: 10),
           DeleteAccount(
-              icon: 'delete_account', title: 'profile.deleteAccount'.tr()),
+            icon: 'delete_account',
+            title: 'profile.deleteAccount'.tr(),
+          ),
         ],
       ),
     );
