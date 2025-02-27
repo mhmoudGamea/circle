@@ -1,8 +1,10 @@
 import 'package:circle/injection.dart';
+import 'package:circle/presentation/providers/component/component_provider.dart';
 import 'package:circle/presentation/providers/home/home_provider.dart';
 import 'package:circle/presentation/providers/login/login_provider.dart';
 import 'package:circle/presentation/providers/main/main_provider.dart';
 import 'package:circle/presentation/providers/otp/otp_provider.dart';
+import 'package:circle/presentation/providers/products/products_provider.dart';
 import 'package:circle/presentation/providers/profile/profile_provider.dart';
 import 'package:circle/presentation/providers/signup/signup_provider.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +25,8 @@ class GenerateMultiProviders extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => getIt<MainProvider>()),
         ChangeNotifierProvider(create: (_) => getIt<ProfileProvider>()),
         ChangeNotifierProvider(create: (_) => getIt<HomeProvider>()),
+        ChangeNotifierProvider(create: (_) => getIt<ComponentProvider>()),
+        ChangeNotifierProvider(create: (_) => getIt<ProductsProvider>()),
       ],
       child: child,
     );

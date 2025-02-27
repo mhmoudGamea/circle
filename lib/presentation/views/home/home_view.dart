@@ -3,7 +3,8 @@ import 'package:circle/data/models/home/latest_products/latest_products_model.da
 import 'package:circle/presentation/providers/home/home_provider.dart';
 import 'package:circle/presentation/providers/profile/profile_provider.dart';
 import 'package:circle/presentation/views/home/widgets/categories_grid.dart';
-import 'package:circle/presentation/views/home/widgets/latest_products_grid.dart';
+import 'package:circle/presentation/widgets/latest_products_grid.dart';
+import 'package:circle/presentation/views/products/products_view.dart';
 import 'package:circle/presentation/widgets/custom_carousel_slider.dart';
 import 'package:circle/presentation/widgets/custom_header.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -11,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/dimens/dimens.dart';
+import '../../../core/navigator/navigator.dart';
 import 'widgets/city_search_bar.dart';
 import 'widgets/home_app_bar.dart';
 
@@ -54,7 +56,9 @@ class HomeView extends StatelessWidget {
                   CustomHeader(
                     leading: 'home.offers.title'.tr(),
                     trailing: 'home.offers.viewAll'.tr(),
-                    trailingOnTap: () {},
+                    trailingOnTap: () {
+                      NavigatorHandler.push(ProductsView());
+                    },
                   ),
                   SizedBox(height: Dimens.padding_12h),
                 ],

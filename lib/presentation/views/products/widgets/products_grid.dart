@@ -1,15 +1,15 @@
-import 'package:circle/data/models/home/latest_products/latest_products_model.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../data/models/home/latest_products/latest_products_model.dart';
 import '../../../widgets/latest_products_grid_item.dart';
 
-class LatestProductsGrid extends StatelessWidget {
+class ProductsGrid extends StatelessWidget {
   final List<LatestProductsModel> latestProductsModel;
-  const LatestProductsGrid({super.key, required this.latestProductsModel});
+  const ProductsGrid({super.key, required this.latestProductsModel});
 
   @override
   Widget build(BuildContext context) {
-    return SliverGrid.builder(
+    return GridView.builder(
       itemCount: latestProductsModel.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
