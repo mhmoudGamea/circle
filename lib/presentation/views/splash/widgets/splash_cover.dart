@@ -16,13 +16,13 @@ class _SplashCoverState extends State<SplashCover>
   void initState() {
     super.initState();
     _coverAnimationController =
-        AnimationController(vsync: this, duration: Duration(seconds: 2));
+        AnimationController(vsync: this, duration: Duration(seconds: 1));
     _coverAnimation = Tween<Offset>(
       begin: Offset(0, -1.3),
       end: Offset(0, 0),
     ).animate(CurvedAnimation(
         parent: _coverAnimationController, curve: Curves.easeInOut));
-    Future.delayed(Duration(seconds: 2), () {
+    Future.delayed(Duration(seconds: 1), () {
       _coverAnimationController.forward();
     });
   }

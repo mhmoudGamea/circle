@@ -4,30 +4,30 @@ class LatestProductsEntity {
   final num latestProductsId;
   final String latestProductsTitle;
   final String latestProductsImage;
-  final num latestProductsCategoryId;
+  final num? latestProductsCategoryId;
   final CategoriesModel latestProductsCategory;
   final num latestProductsSubCategoryId;
   final CategoriesModel latestProductsSubCategory;
   final String latestProductsDetails;
   final num latestProductsSalesLimit;
-  final double latestProductsPrice;
+  final num latestProductsPrice;
   final String latestProductsUnit;
   final num latestProductsWeightUnit;
-  final double latestProductsPriceWeightUnit;
+  final num latestProductsPriceWeightUnit;
   final bool latestProductsIsOffer;
   final num latestProductsIsActive;
   final String? latestProductsOfferType; // Nullable field
-  final double latestProductsOfferValue;
+  final num latestProductsOfferValue;
   final String latestProductsOfferStartDate;
   final String latestProductsOfferEndDate;
-  final double latestProductsOldPrice;
+  final num latestProductsOldPrice;
   final bool latestProductsIsFavorite;
 
   LatestProductsEntity({
     required this.latestProductsId,
     required this.latestProductsTitle,
     required this.latestProductsImage,
-    required this.latestProductsCategoryId,
+    this.latestProductsCategoryId,
     required this.latestProductsCategory,
     required this.latestProductsSubCategoryId,
     required this.latestProductsSubCategory,

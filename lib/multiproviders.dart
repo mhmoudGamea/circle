@@ -10,6 +10,8 @@ import 'package:circle/presentation/providers/signup/signup_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'presentation/providers/details/details_provider.dart';
+
 class GenerateMultiProviders extends StatelessWidget {
   final Widget child;
 
@@ -24,9 +26,13 @@ class GenerateMultiProviders extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => getIt<SignupProvider>()),
         ChangeNotifierProvider(create: (_) => getIt<MainProvider>()),
         ChangeNotifierProvider(create: (_) => getIt<ProfileProvider>()),
-        ChangeNotifierProvider(create: (_) => getIt<HomeProvider>()),
+        ChangeNotifierProvider(
+            create: (_) => getIt<HomeProvider>()
+              ..getCategories()
+              ..getLatestProducts()),
         ChangeNotifierProvider(create: (_) => getIt<ComponentProvider>()),
         ChangeNotifierProvider(create: (_) => getIt<ProductsProvider>()),
+        ChangeNotifierProvider(create: (_) => getIt<DetailsProvider>()),
       ],
       child: child,
     );

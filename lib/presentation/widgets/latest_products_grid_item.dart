@@ -2,10 +2,12 @@ import 'package:circle/core/app_theme/app_colors.dart';
 import 'package:circle/core/config/app_styles.dart';
 import 'package:circle/core/extensions/num_extensions.dart';
 import 'package:circle/presentation/widgets/custom_bordered_container.dart';
+import 'package:circle/presentation/widgets/custom_fav_icon.dart';
 import 'package:circle/presentation/widgets/custom_svg_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
+import '../../core/utils/helper.dart';
 import '../../data/models/home/latest_products/latest_products_model.dart';
 
 class LatestProductsGridItem extends StatelessWidget {
@@ -22,26 +24,26 @@ class LatestProductsGridItem extends StatelessWidget {
         children: [
           Stack(
             children: [
-              CachedNetworkImage(
-                imageUrl: latestProductsModel.image,
-                placeholder: (context, url) =>
-                    CircularProgressIndicator(color: AppColors.iconColor),
+              SizedBox(
+                height: 120,
+                width: double.infinity,
+                child: CachedNetworkImage(
+                  imageUrl: latestProductsModel.image,
+                  placeholder: (context, url) => Helper.shimmerLoading(),
+                ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  CircleAvatar(
-                    radius: 20,
-                    backgroundColor: AppColors.inputBackground,
-                    child: Icon(Icons.favorite, color: AppColors.favIconColor),
-                  ),
+                  CustomFavIcon(onTap: () {}),
                   if (latestProductsModel.isOffer)
                     CustomBorderedContainer(
                       bg: AppColors.primaryColor,
                       borderRadius: 6,
-                      width: 45,
-                      height: 30,
+                      width: 40,
+                      height: 26,
                       padding: 4,
+                      borderColor: Colors.transparent,
                       child: FittedBox(
                         child: Text('% ${latestProductsModel.offerValue}',
                             style:
@@ -52,7 +54,7 @@ class LatestProductsGridItem extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 8),
+          Spacer(),
           Text(latestProductsModel.title,
               style: AppStyles.r14,
               maxLines: 1,

@@ -1,6 +1,3 @@
-import 'package:circle/core/navigator/navigator.dart';
-import 'package:circle/presentation/providers/otp/otp_provider.dart';
-import 'package:circle/presentation/views/signup/signup_view.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -8,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../core/app_theme/app_colors.dart';
 import '../../../../core/config/app_styles.dart';
+import '../../../providers/otp/otp_provider.dart';
 import '../../../widgets/custom_button.dart';
 import '../../../widgets/custom_pin_code_field.dart';
 
@@ -59,7 +57,7 @@ class CustomLoginBottomSheetWidget extends StatelessWidget {
         CustomButton(
           title: 'otp.buttonTitle'.tr(),
           onTap: () {
-            NavigatorHandler.push(SignupView());
+            // NavigatorHandler.push(SignupView());
           },
         ),
         SizedBox(height: 16),

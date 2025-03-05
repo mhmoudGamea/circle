@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../widgets/custom_app_bar.dart';
@@ -11,7 +12,7 @@ class ProductsView extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(
         showToolBar: true,
-        title: 'المنتجات',
+        title: 'products.appBarTitle'.tr(),
       ),
       body: ProductsViewBody(),
     );

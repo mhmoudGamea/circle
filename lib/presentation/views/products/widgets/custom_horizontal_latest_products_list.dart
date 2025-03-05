@@ -18,7 +18,7 @@ class CustomHorizontalLatestProductsList extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         physics: BouncingScrollPhysics(),
         itemCount:
-            LatestProductsModel.dummyData[0].category.subCategories.length,
+            LatestProductsModel.dummyData[0].category.subCategories!.length,
         separatorBuilder: (context, index) => SizedBox(width: 8),
         itemBuilder: (context, index) => InkWell(
           onTap: () {
@@ -28,7 +28,7 @@ class CustomHorizontalLatestProductsList extends StatelessWidget {
           },
           child: CustomHorizontalLatestProductsListItem(
             title: LatestProductsModel
-                .dummyData[0].category.subCategories[index].title,
+                .dummyData[0].category.subCategories![index].title!,
             isSelected:
                 context.watch<ProductsProvider>().selectedLatestProductIndex ==
                     index,

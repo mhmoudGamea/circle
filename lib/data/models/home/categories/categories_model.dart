@@ -1,18 +1,18 @@
 import 'package:circle/domain/entity/home/categories/categories_entity.dart';
 
 class CategoriesModel extends CategoriesEntity {
-  final num id;
-  final String image;
-  final String title;
-  final List<CategoriesModel> subCategories;
-  final String createdAt;
+  final num? id;
+  final String? image;
+  final String? title;
+  final List<CategoriesModel>? subCategories;
+  final String? createdAt;
 
   CategoriesModel({
-    required this.id,
-    required this.image,
-    required this.title,
-    required this.subCategories,
-    required this.createdAt,
+    this.id,
+    this.image,
+    this.title,
+    this.subCategories,
+    this.createdAt,
   }) : super(
           categoryId: id,
           categoryImage: image,
@@ -21,16 +21,27 @@ class CategoriesModel extends CategoriesEntity {
           date: createdAt,
         );
 
+  static List<CategoriesModel> getCategoriesFromList(
+      {required List<dynamic> list}) {
+    List<CategoriesModel> newList = [];
+    for (var element in list) {
+      newList.add(CategoriesModel.fromJson(json: element));
+    }
+    return newList;
+  }
+
   factory CategoriesModel.fromJson({required Map<String, dynamic> json}) {
     return CategoriesModel(
-      id: json['id'],
-      image: json['image'],
-      title: json['title'],
-      subCategories: (json['sub_categories']
-              as List) // i make it as List because List<dynamic> is not a subtype of List<CategoriesModel> error
-          .map((item) => CategoriesModel.fromJson(json: item))
-          .toList(),
-      createdAt: json['created_at'],
+      id: json['id'] ?? 0,
+      image: json['image'] ?? '',
+      title: json['title'] ?? '',
+      subCategories: json['sub_categories'] != null
+          ? (json['sub_categories']
+                  as List) // i make it as List because List<dynamic> is not a subtype of List<CategoriesModel> error
+              .map((item) => CategoriesModel.fromJson(json: item))
+              .toList()
+          : [],
+      createdAt: json['created_at'] ?? '',
     );
   }
 
@@ -39,7 +50,7 @@ class CategoriesModel extends CategoriesEntity {
       'id': id,
       'image': image,
       'title': title,
-      'sub_categories': subCategories.map((item) => item.toMap()).toList(),
+      'sub_categories': subCategories!.map((item) => item.toMap()).toList(),
       'created_at': createdAt,
     };
   }

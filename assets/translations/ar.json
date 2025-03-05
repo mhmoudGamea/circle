@@ -80,5 +80,15 @@
         "textFieldFirstName": "الاسم الاول",
         "textFieldLastName": "الاسم الاخير",
         "buttonTitle": "تأكيد"
+    },
+    "products": {
+        "appBarTitle": "المنتجات"
+    },
+    "details": {
+        "appBarTitle": "تفاصيل المنتج",
+        "price": "السعر",
+        "total": "الاجمالي",
+        "currency": "ج.م",
+        "basketButton": "اضافة للسلة"
     }
 }

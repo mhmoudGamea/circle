@@ -1,5 +1,3 @@
-import 'package:circle/data/models/home/categories/categories_model.dart';
-import 'package:circle/data/models/home/latest_products/latest_products_model.dart';
 import 'package:circle/presentation/providers/home/home_provider.dart';
 import 'package:circle/presentation/providers/profile/profile_provider.dart';
 import 'package:circle/presentation/views/home/widgets/categories_grid.dart';
@@ -10,6 +8,7 @@ import 'package:circle/presentation/widgets/custom_header.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../core/dimens/dimens.dart';
 import '../../../core/navigator/navigator.dart';
@@ -47,9 +46,16 @@ class HomeView extends StatelessWidget {
                 ],
               ),
             ),
-            // sections grid view
-            CategoriesGrid(
-                model: CategoriesModel.categoriesModel.subCategories),
+            // categories grid view
+            Selector<HomeProvider, bool>(
+              selector: (_, provider) => provider.isLoadingCategory,
+              builder: (context, value, child) => Skeletonizer.sliver(
+                enabled: value,
+                child: CategoriesGrid(
+                    categoriesModel:
+                        context.read<HomeProvider>().categoriesModelList),
+              ),
+            ),
             SliverToBoxAdapter(
               child: Column(
                 children: [
@@ -64,9 +70,18 @@ class HomeView extends StatelessWidget {
                 ],
               ),
             ),
-            // offer grid view
-            LatestProductsGrid(
-                latestProductsModel: LatestProductsModel.dummyData),
+            // latest products grid view
+            Selector<HomeProvider, bool>(
+              selector: (_, provider) => provider.isLoadingLatestProducts,
+              builder: (context, value, child) => Skeletonizer.sliver(
+                enabled: value,
+                child: LatestProductsGrid(
+                    latestProductsModel:
+                        context.read<HomeProvider>().latestProductsModelList),
+              ),
+            ),
+            // LatestProductsGrid(
+            //     latestProductsModel: LatestProductsModel.dummyData),
           ],
         ),
       ),

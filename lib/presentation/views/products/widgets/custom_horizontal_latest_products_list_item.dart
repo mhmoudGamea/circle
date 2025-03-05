@@ -22,9 +22,11 @@ class CustomHorizontalLatestProductsListItem extends StatelessWidget {
             : AppColors.navRailBackgroundColor,
       ),
       child: Center(
-        child: Text(title,
-            textAlign: TextAlign.center,
-            style: TextStyle(color: isSelected ? Colors.white : Colors.black)),
+        child: Text(
+          title,
+          textAlign: TextAlign.center,
+          style: TextStyle(color: isSelected ? Colors.white : Colors.black),
+        ),
       ),
     );
   }

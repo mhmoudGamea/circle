@@ -1,4 +1,9 @@
+import 'package:circle/data/datasource/remote/dio/dio_client.dart';
+import 'package:circle/data/repositories/home_repositories.dart';
+import 'package:circle/data/repositories/login_repository.dart';
+import 'package:circle/data/repositories/signup_repository.dart';
 import 'package:circle/presentation/providers/component/component_provider.dart';
+import 'package:circle/presentation/providers/details/details_provider.dart';
 import 'package:circle/presentation/providers/home/home_provider.dart';
 import 'package:circle/presentation/providers/login/login_provider.dart';
 import 'package:circle/presentation/providers/main/main_provider.dart';
@@ -7,25 +12,41 @@ import 'package:circle/presentation/providers/products/products_provider.dart';
 import 'package:circle/presentation/providers/profile/profile_provider.dart';
 import 'package:circle/presentation/providers/signup/signup_provider.dart';
 import 'package:get_it/get_it.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'data/datasource/remote/dio/logging_interceptor.dart';
 
 final getIt = GetIt.instance;
 
 Future<void> init() async {
-  getIt.registerLazySingleton(() => LoginProvider());
-  getIt.registerLazySingleton(() => OtpProvider());
-  getIt.registerLazySingleton(() => SignupProvider());
-  getIt.registerLazySingleton(() => MainProvider());
-  getIt.registerLazySingleton(() => ProfileProvider());
-  getIt.registerLazySingleton(() => HomeProvider());
-  getIt.registerLazySingleton(() => ComponentProvider());
-  getIt.registerLazySingleton(() => ProductsProvider());
-
-  ///preference
-  // final sharedPreferences = await SharedPreferences.getInstance();
-  // getIt.registerLazySingleton(() => sharedPreferences);
+  ///interceptors
+  getIt.registerLazySingleton(() => LoggingInterceptor());
 
   ///network
-  // getIt.registerLazySingleton(() => Dio());
+  getIt.registerLazySingleton(() => DioClient());
+
+  ///repositories
+  getIt.registerLazySingleton(
+      () => LoginRepository(dioClient: getIt<DioClient>()));
+  getIt.registerLazySingleton(
+      () => SignupRepository(dioClient: getIt<DioClient>()));
+  getIt.registerLazySingleton(
+      () => HomeRepositories(dioClient: getIt<DioClient>()));
+
+  ///app providers
+  getIt.registerLazySingleton(() => LoginProvider(getIt<LoginRepository>()));
+  getIt.registerLazySingleton(() => OtpProvider());
+  getIt.registerLazySingleton(() => SignupProvider(getIt<SignupRepository>()));
+  getIt.registerLazySingleton(() => MainProvider());
+  getIt.registerLazySingleton(() => ProfileProvider());
+  getIt.registerLazySingleton(() => HomeProvider(getIt<HomeRepositories>()));
+  getIt.registerLazySingleton(() => ComponentProvider());
+  getIt.registerLazySingleton(() => ProductsProvider());
+  getIt.registerLazySingleton(() => DetailsProvider());
+
+  ///preference
+  final sharedPreferences = await SharedPreferences.getInstance();
+  getIt.registerLazySingleton(() => sharedPreferences);
 
   ///repositories
 }

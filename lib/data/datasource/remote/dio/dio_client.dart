@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:circle/data/datasource/remote/exception/failure.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 
@@ -44,13 +45,17 @@ class DioClient {
 
       var response = await dio.get(uri,
           queryParameters: queryParameters, cancelToken: cancelToken);
+
       return response;
-    } on SocketException catch (e) {
-      throw SocketException(e.toString());
+    } on SocketException catch (error) {
+      throw ApiFailure(error.toString());
     } on FormatException catch (_) {
-      throw const FormatException("Unable to process the data");
-    } catch (e) {
-      rethrow;
+      throw ApiFailure("Unable to process the data");
+    } on DioException catch (error) {
+      throw ApiFailure.fromDioError(error);
+    } catch (error) {
+      throw ApiFailure(
+          "Oops, there was an error, please try again later. $error");
     }
   }
 
@@ -58,12 +63,15 @@ class DioClient {
     try {
       var response = await dio.get("");
       return response;
-    } on SocketException catch (e) {
-      throw SocketException(e.toString());
+    } on SocketException catch (error) {
+      throw ApiFailure(error.toString());
     } on FormatException catch (_) {
-      throw const FormatException("Unable to process the data");
-    } catch (e) {
-      rethrow;
+      throw ApiFailure("Unable to process the data");
+    } on DioException catch (error) {
+      throw ApiFailure.fromDioError(error);
+    } catch (error) {
+      throw ApiFailure(
+          "Oops, there was an error, please try again later. $error");
     }
   }
 
@@ -83,9 +91,12 @@ class DioClient {
           data: formData ?? FormData.fromMap(data), cancelToken: cancelToken);
       return response;
     } on FormatException catch (_) {
-      throw const FormatException("Unable to process the data");
-    } catch (e) {
-      rethrow;
+      throw ApiFailure("Unable to process the data");
+    } on DioException catch (error) {
+      throw ApiFailure.fromDioError(error);
+    } catch (error) {
+      throw ApiFailure(
+          "Oops, there was an error, please try again later. $error");
     }
   }
 

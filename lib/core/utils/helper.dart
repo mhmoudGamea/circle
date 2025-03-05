@@ -1,7 +1,9 @@
+import 'package:circle/core/config/app_styles.dart';
 import 'package:circle/core/dimens/dimens.dart';
 import 'package:circle/main.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../app_theme/app_colors.dart';
 import '../services/responsive_service.dart';
@@ -70,53 +72,78 @@ abstract class Helper {
       ),
     );
   }
-}
-/*
-here is my provider => class LoginProvider extends ChangeNotifier { // count down time in otp modal bottom sheet
-  int _remainingTime = 15;
 
-  int get remainingTimer => _remainingTime;
+  /// method to show a nice shimmer effect on the screen
+  static Widget shimmerLoading() => Shimmer.fromColors(
+        baseColor: AppColors.shimmerBaseColor,
+        highlightColor: AppColors.shimmerHighlightColor,
+        child: Container(
+          color: AppColors.shimmerBaseColor,
+        ),
+      );
 
-  Timer? _timer;
-
-  final bool _showResendCode = false;
-
-  bool get showResendCode => _showResendCode;                        void _runTimer() {
-    if (_remainingTime > 0) {
-      _timer = Timer(Duration(seconds: 1), () {
-        _remainingTime -= 1;
-        notifyListeners();
-        _runTimer(); // Schedule the timer again
-      });
-    }
-  }
-
-  void startTimer() {
-    _remainingTime = 15;
-    notifyListeners();
-    _runTimer();
-  }
-
-  void _dispose() {
-    _timer!.cancel();
-  }} => here is my Row => Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Visibility(
-              visible: loginProvider.showResendCode,
-              child: Text(
-                'otp.resendOtp'.tr(),
-                style: AppStyles.b14.copyWith(color: AppColors.primaryColor),
+  /// method used to show a success message in the bottom of the screen
+  static successMessage(BuildContext context, {required String message}) {
+    return ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: Colors.transparent,
+        behavior: SnackBarBehavior.floating,
+        elevation: 0,
+        content: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+          height: 80,
+          decoration: BoxDecoration(
+            color: AppColors.primaryColor,
+            borderRadius: const BorderRadius.all(Radius.circular(8)),
+          ),
+          child: Row(
+            children: [
+              const Icon(
+                Icons.check_circle_outline_rounded,
+                color: AppColors.white,
+                size: 22,
               ),
-            ),
-            Selector<LoginProvider, int>(
-              selector: (context, provider) => provider.remainingTimer,
-              builder: (_, value, child) => value == 0
-                  ? SizedBox()
-                  : Text(
-                      '00:${value.toString().padLeft(2, '0')}',
-                      style: AppStyles.b14.copyWith(color: Color(0xff1F1F1F)),
-                    ),
-            ),
-          ],
-        ), => here is my showmodalbottomsheet method i should call it when user enter his number so then he could enter his otp*/
+              const SizedBox(width: 10),
+              Expanded(
+                child: Text(message,
+                    style: AppStyles.b14.copyWith(color: AppColors.white)),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  static errorMessage(BuildContext context, {required String message}) {
+    return ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: Colors.transparent,
+        behavior: SnackBarBehavior.floating,
+        elevation: 0,
+        content: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+          height: 80,
+          decoration: BoxDecoration(
+            color: AppColors.primaryColor,
+            borderRadius: const BorderRadius.all(Radius.circular(8)),
+          ),
+          child: Row(
+            children: [
+              const Icon(
+                Icons.warning_amber_rounded,
+                color: AppColors.white,
+                size: 22,
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Text(message,
+                    style: AppStyles.b14.copyWith(color: AppColors.white)),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

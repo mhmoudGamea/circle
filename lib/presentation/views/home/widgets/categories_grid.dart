@@ -5,13 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class CategoriesGrid extends StatelessWidget {
-  final List<CategoriesModel> model;
-  const CategoriesGrid({super.key, required this.model});
+  final List<CategoriesModel> categoriesModel;
+  const CategoriesGrid({super.key, required this.categoriesModel});
 
   @override
   Widget build(BuildContext context) {
     return SliverGrid.builder(
-      itemCount: model.length,
+      itemCount: categoriesModel.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 4,
         mainAxisSpacing: 4,
@@ -23,7 +23,8 @@ class CategoriesGrid extends StatelessWidget {
           context.read<MainProvider>().setSelectedGridItemIndex(index);
         },
         child: CategoriesGridItem(
-            image: model[index].image, title: model[index].title),
+            image: categoriesModel[index].image!,
+            title: categoriesModel[index].title!),
       ),
     );
   }

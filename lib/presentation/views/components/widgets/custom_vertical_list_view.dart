@@ -11,7 +11,7 @@ class CustomVerticalListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
-      itemCount: CategoriesModel.categoriesModel.subCategories.length,
+      itemCount: CategoriesModel.categoriesModel.subCategories!.length,
       physics: BouncingScrollPhysics(),
       separatorBuilder: (context, index) => SizedBox(height: 10),
       itemBuilder: (context, index) => InkWell(
@@ -19,8 +19,8 @@ class CustomVerticalListView extends StatelessWidget {
           context.read<MainProvider>().setSelectedGridItemIndex(index);
         },
         child: CustomVerticalListViewItem(
-          image: CategoriesModel.categoriesModel.subCategories[index].image,
-          title: CategoriesModel.categoriesModel.subCategories[index].title,
+          image: CategoriesModel.categoriesModel.subCategories![index].image!,
+          title: CategoriesModel.categoriesModel.subCategories![index].title!,
           isSelected: context.watch<MainProvider>().selectedIndex == index,
         ),
       ),

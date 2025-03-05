@@ -80,5 +80,15 @@
         "textFieldFirstName": "First Name",
         "textFieldLastName": "Last Name",
         "buttonTitle": "Confirm"
+    },
+    "products": {
+        "appBarTitle": "Products"
+    },
+    "details": {
+        "appBarTitle": "Product Details",
+        "price": "Price",
+        "total": "Total",
+        "currency": "EGP",
+        "basketButton": "Add to Basket"
     }
 }

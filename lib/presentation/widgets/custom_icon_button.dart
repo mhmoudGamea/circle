@@ -1,6 +1,5 @@
 import 'package:circle/core/app_theme/app_colors.dart';
 import 'package:circle/core/config/app_styles.dart';
-import 'package:circle/core/extensions/num_extensions.dart';
 import 'package:circle/presentation/widgets/custom_bordered_container.dart';
 import 'package:circle/presentation/widgets/custom_svg_icon.dart';
 import 'package:flutter/material.dart';
@@ -41,10 +40,11 @@ class CustomIconButton extends StatelessWidget {
         width: width,
         height: height,
         isExpanded: isExpanded,
+        padding: 0,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            CustomSvgIcon(assetName: icon, width: 22.w, height: 22.w),
+            CustomSvgIcon(assetName: icon),
             Text(
               title,
               style: AppStyles.b16.copyWith(

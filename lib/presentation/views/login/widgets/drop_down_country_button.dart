@@ -28,7 +28,7 @@ class DropDownCountryButton extends StatelessWidget {
                   child: Row(
                     spacing: 10,
                     children: [
-                      SvgPicture.asset(element.values.last, height: 32),
+                      SvgPicture.asset(element['flag']!, height: 32),
                       Text(element.values.first, style: AppStyles.b14),
                     ],
                   ),

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/navigator/navigator.dart';
 import '../../../../data/models/home/latest_products/latest_products_model.dart';
 import '../../../widgets/latest_products_grid_item.dart';
+import '../../details/details_view.dart';
 
 class ProductsGrid extends StatelessWidget {
   final List<LatestProductsModel> latestProductsModel;
@@ -17,8 +19,14 @@ class ProductsGrid extends StatelessWidget {
         crossAxisSpacing: 6,
         childAspectRatio: 0.68,
       ),
-      itemBuilder: (context, index) => LatestProductsGridItem(
-        latestProductsModel: latestProductsModel[index],
+      itemBuilder: (context, index) => InkWell(
+        onTap: () {
+          NavigatorHandler.push(
+              DetailsView(latestProductsModel: latestProductsModel[index]));
+        },
+        child: LatestProductsGridItem(
+          latestProductsModel: latestProductsModel[index],
+        ),
       ),
     );
   }

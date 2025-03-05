@@ -1,11 +1,11 @@
-import 'package:circle/core/app_theme/app_colors.dart';
-import 'package:circle/injection.dart';
-import 'package:circle/multiproviders.dart';
-import 'package:circle/presentation/views/main/main_view.dart';
+import 'package:circle/presentation/views/splash/splash_view.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
+import 'core/app_theme/app_colors.dart';
 import 'core/constants/constants.dart';
+import 'injection.dart';
+import 'multiproviders.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
       supportedLocales: context.supportedLocales,
       locale: context.locale,
       navigatorKey: navigatorKey,
-      home: MainView(),
+      home: SplashView(),
     );
   }
 }

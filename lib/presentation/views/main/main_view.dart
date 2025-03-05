@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -11,6 +13,7 @@ class MainView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log('should be at home');
     return Consumer<MainProvider>(
       builder: (_, provider, child) => Scaffold(
         appBar: provider.currentIndex == 0

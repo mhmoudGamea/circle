@@ -1,10 +1,21 @@
 import 'dart:io';
 
-import 'package:circle/core/services/image_picker_service.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../core/services/image_picker_service.dart';
+import '../../../core/constants/constants.dart';
+import '../../../core/models/base_sigup_model.dart';
+import '../../../core/navigator/navigator.dart';
+import '../../../core/services/prefs.dart';
+import '../../../core/utils/helper.dart';
+import '../../../data/repositories/signup_repository.dart';
+import '../../views/login/login_view.dart';
+
 class SignupProvider extends ImagePickerService with ChangeNotifier {
+  final SignupRepository signupRepository;
+
+  SignupProvider(this.signupRepository);
   // form
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -74,10 +85,50 @@ class SignupProvider extends ImagePickerService with ChangeNotifier {
   }
 
   // validate
-  void validate() {
+  bool validate() {
     if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+      return true;
     } else {
       _autovalidateMode = AutovalidateMode.always;
+      return false;
     }
+  }
+
+  bool _loginLoading = false;
+
+  bool get loginLoading => _loginLoading;
+
+  // signup user
+  Future<void> signupUser(
+      {required BuildContext context,
+      required String phone,
+      required String phoneCode}) async {
+    _loginLoading = true;
+    notifyListeners();
+    BaseSignupModel baseSignupModel = BaseSignupModel(
+      firstName: _firstNameEditingController.text,
+      lastName: _lastNameEditingController.text,
+      phoneNumber: phone,
+      phoneCode: phoneCode,
+      cityId: '1',
+    );
+    final result =
+        await signupRepository.signupUser(baseSignupModel: baseSignupModel);
+    result.fold((fail) {
+      _loginLoading = false;
+      notifyListeners();
+      // show error snackbar he need to register
+      Helper.errorMessage(context, message: fail.message);
+    }, (success) {
+      _loginLoading = false;
+      notifyListeners();
+      Prefs.set(Constants.image, _pickedImage?.path ?? '');
+      Prefs.set(Constants.firstName, _firstNameEditingController.text);
+      Prefs.set(Constants.lastName, _lastNameEditingController.text);
+      NavigatorHandler.push(LoginView());
+      // show success snackbar
+      Helper.errorMessage(context, message: 'Success to create Account');
+    });
   }
 }

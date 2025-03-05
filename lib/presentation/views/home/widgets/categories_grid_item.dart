@@ -4,6 +4,8 @@ import 'package:circle/core/config/app_styles.dart';
 import 'package:circle/presentation/widgets/custom_bordered_container.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../core/utils/helper.dart';
+
 class CategoriesGridItem extends StatelessWidget {
   final String image;
   final String title;
@@ -21,10 +23,7 @@ class CategoriesGridItem extends StatelessWidget {
           borderWidth: 1,
           child: CachedNetworkImage(
             imageUrl: image,
-            placeholder: (context, url) => CustomBorderedContainer(
-                height: 70,
-                borderColor: Colors.transparent,
-                child: CircularProgressIndicator(color: AppColors.iconColor)),
+            placeholder: (context, url) => Helper.shimmerLoading(),
           ),
         ),
         SizedBox(height: 10),
