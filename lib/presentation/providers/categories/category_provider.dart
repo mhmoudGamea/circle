@@ -1,15 +1,11 @@
-import 'dart:developer';
-
 import 'package:circle/presentation/providers/main/main_provider.dart';
+import 'package:circle/presentation/providers/mixins/category_mixin.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../../../core/utils/helper.dart';
-import '../../../data/models/home/categories/categories_model.dart';
 import '../../../data/repositories/category_repository.dart';
 import '../../../main.dart';
 
-class CategoryProvider extends ChangeNotifier {
+class CategoryProvider with ChangeNotifier, CategoryMixin {
   final CategoriesRepository categoryRepository;
 
   CategoryProvider(this.categoryRepository);
@@ -25,33 +21,5 @@ class CategoryProvider extends ChangeNotifier {
       navigatorKey.currentContext!.read<MainProvider>().changeIndex(1);
     }
     notifyListeners();
-  }
-
-  /// method to get categories in home
-  List<CategoriesModel> _categoriesModelList = [];
-  List<CategoriesModel> get categoriesModelList => [..._categoriesModelList];
-
-  bool _isLoadingCategory = false;
-  bool get isLoadingCategory => _isLoadingCategory;
-
-  void _disposeCategories() {
-    _isLoadingCategory = false;
-    notifyListeners();
-  }
-
-  Future<void> getCategories() async {
-    _isLoadingCategory = true;
-    notifyListeners();
-    final result = await categoryRepository.getCategories();
-    result.fold((fail) {
-      _disposeCategories();
-      // show error snackbar
-      Helper.errorMessage(navigatorKey.currentContext!, message: fail.message);
-      log('error in component provider getCategories ${fail.message}');
-    }, (success) {
-      _categoriesModelList = success;
-      log('sucess in component provider getCategories ${_categoriesModelList.length}');
-      _disposeCategories();
-    });
   }
 }
