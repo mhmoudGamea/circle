@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/config/app_styles.dart';
-import '../../../providers/component/component_provider.dart';
+import '../../../providers/categories/category_provider.dart';
 import 'custom_sub_category_list.dart';
 
 class CustomSubCategoryListConsumer extends StatelessWidget {
@@ -11,8 +11,8 @@ class CustomSubCategoryListConsumer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<ComponentProvider>(context);
-    return Selector<ComponentProvider, int>(
+    final provider = Provider.of<CategoryProvider>(context);
+    return Selector<CategoryProvider, int>(
       selector: (_, provider) => provider.selectedIndex,
       builder: (context, value, child) {
         return provider.categoriesModelList.isEmpty

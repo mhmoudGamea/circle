@@ -1,9 +1,9 @@
 import 'package:circle/data/datasource/remote/dio/dio_client.dart';
-import 'package:circle/data/repositories/components_repository.dart';
+import 'package:circle/data/repositories/category_repository.dart';
 import 'package:circle/data/repositories/home_repository.dart';
 import 'package:circle/data/repositories/login_repository.dart';
 import 'package:circle/data/repositories/signup_repository.dart';
-import 'package:circle/presentation/providers/component/component_provider.dart';
+import 'package:circle/presentation/providers/categories/category_provider.dart';
 import 'package:circle/presentation/providers/details/details_provider.dart';
 import 'package:circle/presentation/providers/home/home_provider.dart';
 import 'package:circle/presentation/providers/login/login_provider.dart';
@@ -34,7 +34,7 @@ Future<void> init() async {
   getIt.registerLazySingleton(
       () => HomeRepository(dioClient: getIt<DioClient>()));
   getIt.registerLazySingleton(
-      () => ComponentsRepository(dioClient: getIt<DioClient>()));
+      () => CategoriesRepository(dioClient: getIt<DioClient>()));
 
   ///app providers
   getIt.registerLazySingleton(() => LoginProvider(getIt<LoginRepository>()));
@@ -44,7 +44,7 @@ Future<void> init() async {
   getIt.registerLazySingleton(() => ProfileProvider());
   getIt.registerLazySingleton(() => HomeProvider(getIt<HomeRepository>()));
   getIt.registerLazySingleton(
-      () => ComponentProvider(getIt<ComponentsRepository>()));
+      () => CategoryProvider(getIt<CategoriesRepository>()));
   getIt.registerLazySingleton(() => ProductsProvider());
   getIt.registerLazySingleton(() => DetailsProvider());
 

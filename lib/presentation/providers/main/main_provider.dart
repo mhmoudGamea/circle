@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../views/components/component_view.dart';
+import '../../views/categories/category_view.dart';
 import '../../views/home/home_view.dart';
 import '../../views/profile/profile_view.dart';
 
@@ -8,7 +8,7 @@ class MainProvider extends ChangeNotifier {
   // list of views that i have in bottom nav bar
   final List<Widget> _views = [
     HomeView(),
-    ComponentView(),
+    CategoryView(),
     ProfileView(),
   ];
 

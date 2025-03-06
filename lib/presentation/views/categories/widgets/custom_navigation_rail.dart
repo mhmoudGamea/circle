@@ -1,5 +1,5 @@
-import 'package:circle/presentation/providers/component/component_provider.dart';
-import 'package:circle/presentation/views/components/widgets/custom_vertical_list_view.dart';
+import 'package:circle/presentation/providers/categories/category_provider.dart';
+import 'package:circle/presentation/views/categories/widgets/custom_vertical_list_view.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -30,13 +30,13 @@ class CustomNavigationRail extends StatelessWidget {
                 bottomRight: Radius.circular(16),
               ),
       ),
-      child: Selector<ComponentProvider, bool>(
+      child: Selector<CategoryProvider, bool>(
         selector: (_, provider) => provider.isLoadingCategory,
         builder: (context, value, child) => Skeletonizer(
           enabled: value,
           child: CustomVerticalListView(
               categoriesModelList:
-                  context.read<ComponentProvider>().categoriesModelList),
+                  context.read<CategoryProvider>().categoriesModelList),
         ),
         // child: ,
       ),

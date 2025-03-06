@@ -7,8 +7,8 @@ import 'package:provider/provider.dart';
 import 'widgets/custom_navigation_rail.dart';
 import 'widgets/custom_sub_category_list_consumer.dart';
 
-class ComponentView extends StatelessWidget {
-  const ComponentView({super.key});
+class CategoryView extends StatelessWidget {
+  const CategoryView({super.key});
 
   @override
   Widget build(BuildContext context) {

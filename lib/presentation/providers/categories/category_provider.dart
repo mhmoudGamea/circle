@@ -6,21 +6,19 @@ import 'package:provider/provider.dart';
 
 import '../../../core/utils/helper.dart';
 import '../../../data/models/home/categories/categories_model.dart';
-import '../../../data/repositories/components_repository.dart';
+import '../../../data/repositories/category_repository.dart';
 import '../../../main.dart';
 
-class ComponentProvider extends ChangeNotifier {
-  final ComponentsRepository componentsRepository;
+class CategoryProvider extends ChangeNotifier {
+  final CategoriesRepository categoryRepository;
 
-  ComponentProvider(this.componentsRepository);
+  CategoryProvider(this.categoryRepository);
 
-  // Sets the selected grid item index and navigates to the ComponentView.
-
+  /// Sets the selected grid item index and navigates to the ComponentView.
   int _selectedIndex = 0;
 
   int get selectedIndex => _selectedIndex;
   void changeGridItemIndex(int index) {
-    print('i am here in component provider');
     _selectedIndex = index;
     // if statement to not allow the user to nav to component view if he is already at it
     if (navigatorKey.currentContext!.read<MainProvider>().currentIndex != 1) {
@@ -29,7 +27,7 @@ class ComponentProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // method to get categories in home
+  /// method to get categories in home
   List<CategoriesModel> _categoriesModelList = [];
   List<CategoriesModel> get categoriesModelList => [..._categoriesModelList];
 
@@ -44,7 +42,7 @@ class ComponentProvider extends ChangeNotifier {
   Future<void> getCategories() async {
     _isLoadingCategory = true;
     notifyListeners();
-    final result = await componentsRepository.getCategories();
+    final result = await categoryRepository.getCategories();
     result.fold((fail) {
       _disposeCategories();
       // show error snackbar

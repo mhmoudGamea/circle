@@ -1,7 +1,7 @@
 import 'dart:developer';
 
-import 'package:circle/presentation/providers/component/component_provider.dart';
-import 'package:circle/presentation/views/components/widgets/custom_vertical_list_view_item.dart';
+import 'package:circle/presentation/providers/categories/category_provider.dart';
+import 'package:circle/presentation/views/categories/widgets/custom_vertical_list_view_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -21,12 +21,12 @@ class CustomVerticalListView extends StatelessWidget {
       itemBuilder: (context, index) => InkWell(
         onTap: () {
           //TODO: get subcategory products
-          context.read<ComponentProvider>().changeGridItemIndex(index);
+          context.read<CategoryProvider>().changeGridItemIndex(index);
         },
         child: CustomVerticalListViewItem(
           image: categoriesModelList[index].image!,
           title: categoriesModelList[index].title!,
-          isSelected: context.watch<ComponentProvider>().selectedIndex == index,
+          isSelected: context.watch<CategoryProvider>().selectedIndex == index,
         ),
       ),
     );

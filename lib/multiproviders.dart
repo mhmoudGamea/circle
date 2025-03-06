@@ -1,5 +1,5 @@
 import 'package:circle/injection.dart';
-import 'package:circle/presentation/providers/component/component_provider.dart';
+import 'package:circle/presentation/providers/categories/category_provider.dart';
 import 'package:circle/presentation/providers/home/home_provider.dart';
 import 'package:circle/presentation/providers/login/login_provider.dart';
 import 'package:circle/presentation/providers/main/main_provider.dart';
@@ -31,7 +31,7 @@ class GenerateMultiProviders extends StatelessWidget {
               ..getCategories()
               ..getLatestProducts()),
         ChangeNotifierProvider(
-            create: (_) => getIt<ComponentProvider>()..getCategories()),
+            create: (_) => getIt<CategoryProvider>()..getCategories()),
         ChangeNotifierProvider(create: (_) => getIt<ProductsProvider>()),
         ChangeNotifierProvider(create: (_) => getIt<DetailsProvider>()),
       ],

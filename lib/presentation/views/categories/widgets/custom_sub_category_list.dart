@@ -1,9 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:circle/core/app_theme/app_colors.dart';
-import 'package:circle/core/utils/helper.dart';
 import 'package:circle/data/models/home/categories/categories_model.dart';
 import 'package:circle/presentation/widgets/custom_bordered_container.dart';
-// import 'package:circle/presentation/widgets/custom_svg_icon.dart';
 import 'package:flutter/material.dart';
 
 class CustomSubCategoryList extends StatelessWidget {

@@ -8,10 +8,10 @@ import '../../core/models/failure_model.dart';
 import '../datasource/remote/exception/failure.dart';
 import '../models/home/categories/categories_model.dart';
 
-class ComponentsRepository {
+class CategoriesRepository {
   final DioClient dioClient;
 
-  ComponentsRepository({required this.dioClient});
+  CategoriesRepository({required this.dioClient});
   Future<Either<FailureModel, List<CategoriesModel>>> getCategories() async {
     late Response response;
     try {
