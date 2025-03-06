@@ -1,42 +1,28 @@
-import 'dart:developer';
-
-import 'package:circle/data/datasource/remote/exception/failure.dart';
-import 'package:circle/data/models/home/latest_products/latest_products_model.dart';
 import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
 
 import '../../core/models/failure_model.dart';
-import '../datasource/remote/dio/dio_client.dart';
+import '../../domain/repositories/base_category_repository.dart';
+import '../../domain/repositories/base_latest_products_repository.dart';
 import '../models/home/categories/categories_model.dart';
+import '../models/home/latest_products/latest_products_model.dart';
+import 'base_category_repository_impl.dart';
+import 'base_latest_products_repository_impl.dart';
 
-class HomeRepository {
-  final DioClient dioClient;
-  HomeRepository({required this.dioClient});
+class HomeRepository
+    implements BaseCategoryRepository, BaseLatestProductsRepository {
+  final BaseCategoryRepositoryImpl baseCategoryRepository;
+  final BaseLatestProductsRepositoryImpl baseLatestProductsRepository;
+  HomeRepository(
+      {required this.baseCategoryRepository,
+      required this.baseLatestProductsRepository});
 
+  @override
   Future<Either<FailureModel, List<CategoriesModel>>> getCategories() async {
-    late Response response;
-    try {
-      response = await dioClient.get('home/categories');
-      // log('Success in HomeRepositories class method getCategories ${response.data['data']}');
-      return right(
-          CategoriesModel.getCategoriesFromList(list: response.data['data']));
-    } on ApiFailure catch (error) {
-      log('Error in HomeRepositories class method getCategories ${error.errorMessage}');
-      return left(FailureModel.fromJson(response.data));
-    }
+    return baseCategoryRepository.getCategories();
   }
 
-  Future<Either<FailureModel, List<LatestProductsModel>>>
-      getLatestProducts() async {
-    late Response response;
-    try {
-      response = await dioClient.get('home/latestProducts');
-      // log('Success in HomeRepositories class method getCategories ${response.data['data']}');
-      return right(LatestProductsModel.getLatestProductsFromList(
-          list: response.data['data']));
-    } on ApiFailure catch (error) {
-      log('Error in HomeRepositories class method getLatestProducts $error');
-      return left(FailureModel.fromJson(response.data));
-    }
+  @override
+  Future<Either<FailureModel, List<LatestProductsModel>>> getLatestProducts() {
+    return baseLatestProductsRepository.getLatestProducts();
   }
 }

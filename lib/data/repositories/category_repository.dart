@@ -1,27 +1,15 @@
-import 'dart:developer';
-
-import 'package:circle/data/datasource/remote/dio/dio_client.dart';
 import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
 
 import '../../core/models/failure_model.dart';
-import '../datasource/remote/exception/failure.dart';
+import '../../domain/repositories/base_category_repository.dart';
 import '../models/home/categories/categories_model.dart';
+import 'base_category_repository_impl.dart';
 
-class CategoriesRepository {
-  final DioClient dioClient;
-
-  CategoriesRepository({required this.dioClient});
-  Future<Either<FailureModel, List<CategoriesModel>>> getCategories() async {
-    late Response response;
-    try {
-      response = await dioClient.get('home/categories');
-      // log('Success in HomeRepositories class method getCategories ${response.data['data']}');
-      return right(
-          CategoriesModel.getCategoriesFromList(list: response.data['data']));
-    } on ApiFailure catch (error) {
-      log('Error in ComponentsRepository class method getCategories ${error.errorMessage}');
-      return left(FailureModel.fromJson(response.data));
-    }
+class CategoriesRepository implements BaseCategoryRepository {
+  final BaseCategoryRepositoryImpl baseCategoryRepository;
+  CategoriesRepository({required this.baseCategoryRepository});
+  @override
+  Future<Either<FailureModel, List<CategoriesModel>>> getCategories() {
+    return baseCategoryRepository.getCategories();
   }
 }
