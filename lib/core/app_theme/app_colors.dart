@@ -20,5 +20,5 @@ abstract class AppColors {
   static const navRailBackgroundButtonColor = Color(0x0DDF1C26);
   // shimmer colors
   static const shimmerBaseColor = Color(0xffF9F9F9);
-  static const shimmerHighlightColor = Color(0xFFF5F4F4);
+  static const shimmerHighlightColor = Color(0xFFEEECEC);
 }

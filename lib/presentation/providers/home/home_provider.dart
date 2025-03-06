@@ -2,14 +2,14 @@ import 'dart:developer';
 
 import 'package:circle/data/models/home/categories/categories_model.dart';
 import 'package:circle/data/models/home/latest_products/latest_products_model.dart';
-import 'package:circle/data/repositories/home_repositories.dart';
+import 'package:circle/data/repositories/home_repository.dart';
 import 'package:circle/main.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/utils/helper.dart';
 
 class HomeProvider extends ChangeNotifier {
-  final HomeRepositories homeRepositories;
+  final HomeRepository homeRepositories;
   HomeProvider(this.homeRepositories);
   // city drop down menu
   static final List<String> _cities = [
@@ -88,9 +88,10 @@ class HomeProvider extends ChangeNotifier {
       Helper.errorMessage(navigatorKey.currentContext!, message: fail.message);
       log('error in home provider getLatestProducts ${fail.message}');
     }, (success) {
-      _disposeLatestProducts();
       _latestProductsModelList = success;
       log('sucess in home provider getLatestProducts ${_latestProductsModelList.length}');
+      _disposeLatestProducts();
+      log(_isLoadingLatestProducts.toString());
     });
   }
 }

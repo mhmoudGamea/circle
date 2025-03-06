@@ -9,9 +9,9 @@ import '../../core/models/failure_model.dart';
 import '../datasource/remote/dio/dio_client.dart';
 import '../models/home/categories/categories_model.dart';
 
-class HomeRepositories {
+class HomeRepository {
   final DioClient dioClient;
-  HomeRepositories({required this.dioClient});
+  HomeRepository({required this.dioClient});
 
   Future<Either<FailureModel, List<CategoriesModel>>> getCategories() async {
     late Response response;

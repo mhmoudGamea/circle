@@ -23,16 +23,6 @@ class MainProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Sets the selected grid item index and navigates to the ComponentView.
-
-  int _selectedIndex = -1;
-
-  int get selectedIndex => _selectedIndex;
-  void setSelectedGridItemIndex(int index) {
-    _selectedIndex = index;
-    changeIndex(1);
-  }
-
   // return appBarTitle based on current index
   String appBarTitle() {
     if (currentIndex == 0) {

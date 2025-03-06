@@ -21,6 +21,7 @@ class MainView extends StatelessWidget {
             : CustomAppBar(
                 showToolBar: true,
                 title: provider.appBarTitle().tr(),
+                showBackArrow: false,
               ),
         body: SafeArea(
           child: IndexedStack(

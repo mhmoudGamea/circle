@@ -1,5 +1,7 @@
+import 'dart:developer';
+
 import 'package:circle/data/models/home/categories/categories_model.dart';
-import 'package:circle/presentation/providers/main/main_provider.dart';
+import 'package:circle/presentation/providers/component/component_provider.dart';
 import 'package:circle/presentation/views/home/widgets/categories_grid_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -10,6 +12,7 @@ class CategoriesGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<ComponentProvider>(context, listen: false);
     return SliverGrid.builder(
       itemCount: categoriesModel.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -20,7 +23,12 @@ class CategoriesGrid extends StatelessWidget {
       ),
       itemBuilder: (context, index) => InkWell(
         onTap: () {
-          context.read<MainProvider>().setSelectedGridItemIndex(index);
+          provider.changeGridItemIndex(index);
+          // if statement to call api just one time to get categories
+          if (provider.categoriesModelList.isEmpty) {
+            log("it's not empty");
+            provider.getCategories();
+          }
         },
         child: CategoriesGridItem(
             image: categoriesModel[index].image!,

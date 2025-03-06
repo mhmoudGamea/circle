@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/app_theme/app_colors.dart';
+import '../../../../core/utils/helper.dart';
 import '../../../widgets/custom_bordered_container.dart';
 
 class CustomVerticalListViewItem extends StatelessWidget {
@@ -28,7 +30,10 @@ class CustomVerticalListViewItem extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(15),
-              child: Image.network(image),
+              child: CachedNetworkImage(
+                imageUrl: image,
+                placeholder: (context, url) => Helper.shimmerLoading(),
+              ),
             ),
             SizedBox(height: 5),
             Text(title, textAlign: TextAlign.center)
