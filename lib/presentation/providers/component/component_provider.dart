@@ -16,10 +16,11 @@ class ComponentProvider extends ChangeNotifier {
 
   // Sets the selected grid item index and navigates to the ComponentView.
 
-  int _selectedIndex = -1;
+  int _selectedIndex = 0;
 
   int get selectedIndex => _selectedIndex;
   void changeGridItemIndex(int index) {
+    print('i am here in component provider');
     _selectedIndex = index;
     // if statement to not allow the user to nav to component view if he is already at it
     if (navigatorKey.currentContext!.read<MainProvider>().currentIndex != 1) {

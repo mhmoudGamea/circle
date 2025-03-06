@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:circle/data/models/home/categories/categories_model.dart';
 import 'package:circle/presentation/providers/component/component_provider.dart';
 import 'package:circle/presentation/views/home/widgets/categories_grid_item.dart';
@@ -25,10 +23,10 @@ class CategoriesGrid extends StatelessWidget {
         onTap: () {
           provider.changeGridItemIndex(index);
           // if statement to call api just one time to get categories
-          if (provider.categoriesModelList.isEmpty) {
-            log("it's not empty");
-            provider.getCategories();
-          }
+          // if (provider.categoriesModelList.isEmpty) {
+          //   log("it's not empty");
+          //   provider.getCategories();
+          // }
         },
         child: CategoriesGridItem(
             image: categoriesModel[index].image!,

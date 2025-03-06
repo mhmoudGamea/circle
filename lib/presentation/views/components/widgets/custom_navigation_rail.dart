@@ -34,11 +34,11 @@ class CustomNavigationRail extends StatelessWidget {
         selector: (_, provider) => provider.isLoadingCategory,
         builder: (context, value, child) => Skeletonizer(
           enabled: value,
-          child: child!,
+          child: CustomVerticalListView(
+              categoriesModelList:
+                  context.read<ComponentProvider>().categoriesModelList),
         ),
-        child: CustomVerticalListView(
-            categoriesModelList:
-                context.read<ComponentProvider>().categoriesModelList),
+        // child: ,
       ),
     );
   }

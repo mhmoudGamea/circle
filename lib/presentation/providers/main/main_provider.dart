@@ -19,6 +19,7 @@ class MainProvider extends ChangeNotifier {
   int get currentIndex => _currentIndex;
 
   void changeIndex(int index) {
+    if (index == _currentIndex) return;
     _currentIndex = index;
     notifyListeners();
   }

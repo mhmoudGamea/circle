@@ -1,4 +1,5 @@
 import 'package:circle/presentation/providers/home/home_provider.dart';
+import 'package:circle/presentation/providers/main/main_provider.dart';
 import 'package:circle/presentation/providers/profile/profile_provider.dart';
 import 'package:circle/presentation/views/home/widgets/categories_grid.dart';
 import 'package:circle/presentation/widgets/latest_products_grid.dart';
@@ -40,7 +41,9 @@ class HomeView extends StatelessWidget {
                   CustomHeader(
                     leading: 'home.categories.title'.tr(),
                     trailing: 'home.categories.viewAll'.tr(),
-                    trailingOnTap: () {},
+                    trailingOnTap: () {
+                      context.read<MainProvider>().changeIndex(1);
+                    },
                   ),
                   SizedBox(height: Dimens.padding_12h),
                 ],

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:circle/presentation/providers/component/component_provider.dart';
 import 'package:circle/presentation/views/components/widgets/custom_vertical_list_view_item.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +13,7 @@ class CustomVerticalListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log('rebuilted from scratch');
     return ListView.separated(
       itemCount: categoriesModelList.length,
       physics: BouncingScrollPhysics(),
