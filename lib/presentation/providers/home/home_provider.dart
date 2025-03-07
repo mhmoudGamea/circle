@@ -1,12 +1,8 @@
-import 'package:circle/presentation/providers/mixins/latest_product_mixin.dart';
 import 'package:flutter/material.dart';
-
-import '../../../data/repositories/home_repository.dart';
 import '../mixins/category_mixin.dart';
+import '../mixins/latest_product_mixin.dart';
 
 class HomeProvider with ChangeNotifier, CategoryMixin, LatestProductMixin {
-  final HomeRepository homeRepositories;
-  HomeProvider(this.homeRepositories);
   // city drop down menu
   static final List<String> _cities = [
     'dropDownCity.city0',

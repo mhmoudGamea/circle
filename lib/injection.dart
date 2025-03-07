@@ -4,6 +4,7 @@ import 'package:circle/data/repositories/base_latest_products_repository_impl.da
 import 'package:circle/data/repositories/category_repository.dart';
 import 'package:circle/data/repositories/home_repository.dart';
 import 'package:circle/data/repositories/login_repository.dart';
+import 'package:circle/data/repositories/product_repository.dart';
 import 'package:circle/data/repositories/signup_repository.dart';
 import 'package:circle/domain/repositories/base_category_repository.dart';
 import 'package:circle/domain/repositories/base_latest_products_repository.dart';
@@ -45,8 +46,11 @@ Future<void> init() async {
         baseCategoryRepository: getIt<BaseCategoryRepository>(),
         baseLatestProductsRepository: getIt<BaseLatestProductsRepository>(),
       ));
-  getIt.registerLazySingleton(() => CategoriesRepository(
+  getIt.registerLazySingleton(() => CategoryRepository(
         baseCategoryRepository: getIt<BaseCategoryRepository>(),
+      ));
+  getIt.registerLazySingleton(() => ProductRepository(
+        baseLatestProductsRepository: getIt<BaseLatestProductsRepository>(),
       ));
 
   ///app providers
@@ -55,9 +59,8 @@ Future<void> init() async {
   getIt.registerLazySingleton(() => SignupProvider(getIt<SignupRepository>()));
   getIt.registerLazySingleton(() => MainProvider());
   getIt.registerLazySingleton(() => ProfileProvider());
-  getIt.registerLazySingleton(() => HomeProvider(getIt<HomeRepository>()));
-  getIt.registerLazySingleton(
-      () => CategoryProvider(getIt<CategoriesRepository>()));
+  getIt.registerLazySingleton(() => HomeProvider());
+  getIt.registerLazySingleton(() => CategoryProvider());
   getIt.registerLazySingleton(() => ProductsProvider());
   getIt.registerLazySingleton(() => DetailsProvider());
 

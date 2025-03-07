@@ -79,12 +79,11 @@ class HomeView extends StatelessWidget {
               builder: (context, value, child) => Skeletonizer.sliver(
                 enabled: value,
                 child: LatestProductsGrid(
-                    latestProductsModel:
-                        context.read<HomeProvider>().latestProductsModelList),
+                  latestProductsModel:
+                      context.read<HomeProvider>().latestProductsModelList,
+                ),
               ),
             ),
-            // LatestProductsGrid(
-            //     latestProductsModel: LatestProductsModel.dummyData),
           ],
         ),
       ),

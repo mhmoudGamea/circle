@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-class ProductsProvider extends ChangeNotifier {
+import '../mixins/latest_product_mixin.dart';
+
+class ProductsProvider with ChangeNotifier, LatestProductMixin {
   // select item from category
   int _selectedCategoryIndex = -1;
   int get selectedCategoryIndex => _selectedCategoryIndex;

@@ -3,10 +3,10 @@ import 'package:provider/provider.dart';
 
 import '../../../../data/models/home/latest_products/latest_products_model.dart';
 import '../../../providers/products/products_provider.dart';
-import 'custom_horizontal_latest_products_list_item.dart';
+import 'custom_horizontal_sub_category_list_item.dart';
 
-class CustomHorizontalLatestProductsList extends StatelessWidget {
-  const CustomHorizontalLatestProductsList({super.key});
+class CustomHorizontalSubCategoryList extends StatelessWidget {
+  const CustomHorizontalSubCategoryList({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class CustomHorizontalLatestProductsList extends StatelessWidget {
                 .read<ProductsProvider>()
                 .setSelectedLatestProductIndex(index);
           },
-          child: CustomHorizontalLatestProductsListItem(
+          child: CustomHorizontalSubCategoryListItem(
             title: LatestProductsModel
                 .dummyData[0].category.subCategories![index].title!,
             isSelected:

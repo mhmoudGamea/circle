@@ -1,15 +1,10 @@
-import 'package:circle/presentation/providers/main/main_provider.dart';
-import 'package:circle/presentation/providers/mixins/category_mixin.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../data/repositories/category_repository.dart';
 import '../../../main.dart';
+import '../main/main_provider.dart';
+import '../mixins/category_mixin.dart';
 
 class CategoryProvider with ChangeNotifier, CategoryMixin {
-  final CategoriesRepository categoryRepository;
-
-  CategoryProvider(this.categoryRepository);
-
   /// Sets the selected grid item index and navigates to the ComponentView.
   int _selectedIndex = 0;
 

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/app_theme/app_colors.dart';
 
-class CustomHorizontalLatestProductsListItem extends StatelessWidget {
+class CustomHorizontalSubCategoryListItem extends StatelessWidget {
   final String title;
   final bool isSelected;
-  const CustomHorizontalLatestProductsListItem({
+  const CustomHorizontalSubCategoryListItem({
     super.key,
     required this.title,
     this.isSelected = false,

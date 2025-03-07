@@ -1,15 +1,17 @@
-import 'package:circle/data/models/home/latest_products/latest_products_model.dart';
-import 'package:circle/presentation/views/products/widgets/custom_horizontal_category_list.dart';
-import 'package:circle/presentation/views/products/widgets/custom_horizontal_latest_products_list.dart';
 import 'package:flutter/material.dart';
 import 'package:circle/core/extensions/num_extensions.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:provider/provider.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../core/app_theme/app_colors.dart';
 import '../../../../core/dimens/dimens.dart';
+import '../../../providers/products/products_provider.dart';
 import '../../../widgets/custom_svg_icon.dart';
 import '../../../widgets/custom_text_form.dart';
-import 'products_grid.dart';
+import '../../../widgets/latest_products_grid.dart';
+import 'custom_horizontal_category_list.dart';
+import 'custom_horizontal_sub_category_list.dart';
 
 class ProductsViewBody extends StatelessWidget {
   const ProductsViewBody({super.key});
@@ -39,17 +41,20 @@ class ProductsViewBody extends StatelessWidget {
               SizedBox(height: 8),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: Dimens.padding_16h),
-                child: CustomHorizontalLatestProductsList(),
+                child: CustomHorizontalSubCategoryList(),
               ),
               SizedBox(height: 16),
             ],
           ),
         ),
-        SliverFillRemaining(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: Dimens.padding_16h),
-            child: ProductsGrid(
-                latestProductsModel: LatestProductsModel.dummyData),
+        Selector<ProductsProvider, bool>(
+          selector: (_, provider) => provider.isLoadingLatestProducts,
+          builder: (context, value, child) => Skeletonizer.sliver(
+            enabled: value,
+            child: LatestProductsGrid(
+              latestProductsModel:
+                  context.read<ProductsProvider>().latestProductsModelList,
+            ),
           ),
         ),
       ],
