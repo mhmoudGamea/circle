@@ -7,7 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class CustomHorizontalCategoryList extends StatelessWidget {
-  const CustomHorizontalCategoryList({super.key});
+  final List<CategoriesModel> categoriesModelList;
+  const CustomHorizontalCategoryList(
+      {super.key, required this.categoriesModelList});
 
   @override
   Widget build(BuildContext context) {
@@ -19,19 +21,35 @@ class CustomHorizontalCategoryList extends StatelessWidget {
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         physics: BouncingScrollPhysics(),
-        itemCount: CategoriesModel.categoriesModel.subCategories!.length,
+        itemCount: categoriesModelList.length + 1,
         separatorBuilder: (context, index) => SizedBox(width: 15),
-        itemBuilder: (context, index) => InkWell(
-          onTap: () {
-            context.read<ProductsProvider>().setSelectedCategoryIndex(index);
-          },
-          child: CustomHorizontalCategoryListItem(
-            title: CategoriesModel.categoriesModel.subCategories![index].title!,
-            isSelected:
-                context.watch<ProductsProvider>().selectedCategoryIndex ==
-                    index,
-          ),
-        ),
+        itemBuilder: (context, index) {
+          if (index == 0) {
+            return InkWell(
+              onTap: () {
+                context.read<ProductsProvider>().getSubCategories();
+              },
+              child: Center(
+                child: Text("الكل"),
+              ),
+            );
+          }
+          final realIndex = index - 1;
+          return InkWell(
+            onTap: () {
+              context
+                  .read<ProductsProvider>()
+                  .setSelectedCategoryIndex(realIndex);
+            },
+            child: CustomHorizontalCategoryListItem(
+              image: categoriesModelList[realIndex].image!,
+              title: categoriesModelList[realIndex].title!,
+              isSelected:
+                  context.watch<ProductsProvider>().selectedCategoryIndex ==
+                      realIndex,
+            ),
+          );
+        },
       ),
     );
   }

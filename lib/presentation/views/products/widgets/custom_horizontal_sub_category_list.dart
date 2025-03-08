@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../data/models/home/latest_products/latest_products_model.dart';
+import '../../../../data/models/home/categories/categories_model.dart';
 import '../../../providers/products/products_provider.dart';
 import 'custom_horizontal_sub_category_list_item.dart';
 
 class CustomHorizontalSubCategoryList extends StatelessWidget {
-  const CustomHorizontalSubCategoryList({super.key});
+  final List<CategoriesModel> subCategoryList;
+  const CustomHorizontalSubCategoryList(
+      {super.key, required this.subCategoryList});
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +19,7 @@ class CustomHorizontalSubCategoryList extends StatelessWidget {
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         physics: BouncingScrollPhysics(),
-        itemCount:
-            LatestProductsModel.dummyData[0].category.subCategories!.length,
+        itemCount: subCategoryList.length,
         separatorBuilder: (context, index) => SizedBox(width: 8),
         itemBuilder: (context, index) => InkWell(
           onTap: () {
@@ -27,10 +28,9 @@ class CustomHorizontalSubCategoryList extends StatelessWidget {
                 .setSelectedLatestProductIndex(index);
           },
           child: CustomHorizontalSubCategoryListItem(
-            title: LatestProductsModel
-                .dummyData[0].category.subCategories![index].title!,
+            title: subCategoryList[index].title!,
             isSelected:
-                context.watch<ProductsProvider>().selectedLatestProductIndex ==
+                context.watch<ProductsProvider>().selectedSubCategoryIndex ==
                     index,
           ),
         ),

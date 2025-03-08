@@ -27,13 +27,17 @@ class GenerateMultiProviders extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => getIt<MainProvider>()),
         ChangeNotifierProvider(create: (_) => getIt<ProfileProvider>()),
         ChangeNotifierProvider(
-            create: (_) => getIt<HomeProvider>()
-              ..getCategories()
-              ..getLatestProducts()),
+          create: (_) => getIt<HomeProvider>()
+            ..getCategories()
+            ..getLatestProducts(),
+        ),
         ChangeNotifierProvider(
-            create: (_) => getIt<CategoryProvider>()..getCategories()),
+          create: (_) => getIt<CategoryProvider>()..getCategories(),
+        ),
         ChangeNotifierProvider(
-          create: (_) => getIt<ProductsProvider>()..getLatestProducts(),
+          create: (_) => getIt<ProductsProvider>()
+            ..getCategories()
+            ..getLatestProducts(),
         ),
         ChangeNotifierProvider(create: (_) => getIt<DetailsProvider>()),
       ],

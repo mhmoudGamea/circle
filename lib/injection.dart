@@ -50,6 +50,7 @@ Future<void> init() async {
         baseCategoryRepository: getIt<BaseCategoryRepository>(),
       ));
   getIt.registerLazySingleton(() => ProductRepository(
+        baseCategoryRepository: getIt<BaseCategoryRepository>(),
         baseLatestProductsRepository: getIt<BaseLatestProductsRepository>(),
       ));
 

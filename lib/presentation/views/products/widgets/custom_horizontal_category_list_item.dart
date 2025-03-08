@@ -1,12 +1,18 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:circle/core/utils/helper.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/app_theme/app_colors.dart';
 
 class CustomHorizontalCategoryListItem extends StatelessWidget {
+  final String image;
   final String title;
   final bool isSelected;
   const CustomHorizontalCategoryListItem(
-      {super.key, required this.title, this.isSelected = false});
+      {super.key,
+      required this.image,
+      required this.title,
+      this.isSelected = false});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +26,15 @@ class CustomHorizontalCategoryListItem extends StatelessWidget {
           color: isSelected ? AppColors.primaryColor : Colors.transparent,
         ),
       ),
-      child: FittedBox(child: Text(title)),
+      child: Row(
+        spacing: 10,
+        children: [
+          CachedNetworkImage(
+              imageUrl: image,
+              placeholder: (context, url) => Helper.shimmerLoading()),
+          Text(title),
+        ],
+      ),
     );
   }
 }

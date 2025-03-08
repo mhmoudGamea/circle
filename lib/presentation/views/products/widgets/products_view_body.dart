@@ -1,3 +1,5 @@
+import 'package:circle/data/models/home/categories/categories_model.dart';
+import 'package:circle/data/models/home/latest_products/latest_products_model.dart';
 import 'package:flutter/material.dart';
 import 'package:circle/core/extensions/num_extensions.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -18,6 +20,7 @@ class ProductsViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<ProductsProvider>(context);
     return CustomScrollView(
       slivers: [
         SliverToBoxAdapter(
@@ -37,23 +40,44 @@ class ProductsViewBody extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 8),
-              CustomHorizontalCategoryList(),
-              SizedBox(height: 8),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: Dimens.padding_16h),
-                child: CustomHorizontalSubCategoryList(),
+              // in this CustomHorizontalCategoryList
+              Selector<ProductsProvider, List<CategoriesModel>>(
+                selector: (_, provider) => provider.categoriesModelList,
+                builder: (context, value, child) => Skeletonizer(
+                    enabled: value.isEmpty,
+                    child: Column(
+                      children: [
+                        CustomHorizontalCategoryList(
+                          categoriesModelList: value.isEmpty
+                              ? CategoriesModel.dummyCategory()
+                              : value,
+                        ),
+                        SizedBox(height: 8),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: Dimens.padding_16h),
+                          child: CustomHorizontalSubCategoryList(
+                            subCategoryList: value.isEmpty
+                                ? CategoriesModel.dummySubCategory()
+                                : value[provider.selectedCategoryIndex]
+                                    .subCategories!,
+                          ),
+                        ),
+                      ],
+                    )),
               ),
               SizedBox(height: 16),
             ],
           ),
         ),
-        Selector<ProductsProvider, bool>(
-          selector: (_, provider) => provider.isLoadingLatestProducts,
+        Selector<ProductsProvider, List<LatestProductsModel>>(
+          selector: (_, provider) => provider.latestProductsModelList,
           builder: (context, value, child) => Skeletonizer.sliver(
-            enabled: value,
+            enabled: value.isEmpty,
             child: LatestProductsGrid(
-              latestProductsModel:
-                  context.read<ProductsProvider>().latestProductsModelList,
+              latestProductsModel: value.isEmpty
+                  ? LatestProductsModel.dummyLatestProducts()
+                  : value,
             ),
           ),
         ),
