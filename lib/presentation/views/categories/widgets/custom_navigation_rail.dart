@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../core/app_theme/app_colors.dart';
+import '../../../../data/models/home/categories/categories_model.dart';
 import '../../../../main.dart';
 
 class CustomNavigationRail extends StatelessWidget {
@@ -30,13 +31,13 @@ class CustomNavigationRail extends StatelessWidget {
                 bottomRight: Radius.circular(16),
               ),
       ),
-      child: Selector<CategoryProvider, bool>(
-        selector: (_, provider) => provider.isLoadingCategory,
+      child: Selector<CategoryProvider, List<CategoriesModel>>(
+        selector: (_, provider) => provider.categoriesModelList,
         builder: (context, value, child) => Skeletonizer(
-          enabled: value,
+          enabled: value.isEmpty,
           child: CustomVerticalListView(
               categoriesModelList:
-                  context.read<CategoryProvider>().categoriesModelList),
+                  value.isEmpty ? CategoriesModel.dummyCategory() : value),
         ),
         // child: ,
       ),
