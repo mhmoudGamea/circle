@@ -13,6 +13,8 @@ import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../core/dimens/dimens.dart';
 import '../../../core/navigator/navigator.dart';
+import '../../../data/models/home/categories/categories_model.dart';
+import '../../../data/models/home/latest_products/latest_products_model.dart';
 import 'widgets/city_search_bar.dart';
 import 'widgets/home_app_bar.dart';
 
@@ -50,13 +52,14 @@ class HomeView extends StatelessWidget {
               ),
             ),
             // categories grid view
-            Selector<HomeProvider, bool>(
-              selector: (_, provider) => provider.isLoadingCategory,
+            Selector<HomeProvider, List<CategoriesModel>>(
+              selector: (_, provider) => provider.categoriesModelList,
               builder: (context, value, child) => Skeletonizer.sliver(
-                enabled: value,
+                enabled: value.isEmpty,
                 child: CategoriesGrid(
-                    categoriesModel:
-                        context.read<HomeProvider>().categoriesModelList),
+                  categoriesModel:
+                      value.isEmpty ? CategoriesModel.dummyCategory() : value,
+                ),
               ),
             ),
             SliverToBoxAdapter(
@@ -74,13 +77,14 @@ class HomeView extends StatelessWidget {
               ),
             ),
             // latest products grid view
-            Selector<HomeProvider, bool>(
-              selector: (_, provider) => provider.isLoadingLatestProducts,
+            Selector<HomeProvider, List<LatestProductsModel>>(
+              selector: (_, provider) => provider.latestProductsModelList,
               builder: (context, value, child) => Skeletonizer.sliver(
-                enabled: value,
+                enabled: value.isEmpty,
                 child: LatestProductsGrid(
-                  latestProductsModel:
-                      context.read<HomeProvider>().latestProductsModelList,
+                  latestProductsModel: value.isEmpty
+                      ? LatestProductsModel.dummyLatestProducts()
+                      : value,
                 ),
               ),
             ),

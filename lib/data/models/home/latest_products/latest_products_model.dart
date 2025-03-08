@@ -123,7 +123,7 @@ class LatestProductsModel extends LatestProductsEntity {
 
   static List<LatestProductsModel> dummyLatestProducts() {
     return List.filled(
-      7,
+      8,
       LatestProductsModel(
         id: 1,
         title: 'دجاج عضوي طبيعي',

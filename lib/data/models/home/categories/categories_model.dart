@@ -58,7 +58,7 @@ class CategoriesModel extends CategoriesEntity {
   // Dummy Category Data
   static List<CategoriesModel> dummyCategory() {
     return List.filled(
-      5,
+      13,
       CategoriesModel(
         image:
             'https://ecommerce.project-nami.xyz/storage/images/admins/categories/9HmKb49fJ71697883590.png',
