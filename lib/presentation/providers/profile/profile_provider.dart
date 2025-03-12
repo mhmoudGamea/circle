@@ -1,31 +1,11 @@
-import 'dart:io';
-
-import 'package:circle/core/services/image_picker_service.dart';
 import 'package:circle/main.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 
 import '../../../core/navigator/navigator.dart';
+import '../mixins/pick_image_mixin.dart';
 
-class ProfileProvider extends ImagePickerService with ChangeNotifier {
-  // image picker
-  final ImagePicker _picker = ImagePicker();
-
-  File? _pickedImage;
-
-  @override
-  File? get pickedImage => _pickedImage;
-
-  @override
-  Future<void> pickImage() async {
-    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-    if (image != null) {
-      _pickedImage = File(image.path);
-      notifyListeners();
-    }
-  }
-
+class ProfileProvider with ChangeNotifier, PickImageMixin {
   // change app language bottom modal sheet
   // 0 for arabic, 1 for english
   int _currentIndex = -1;

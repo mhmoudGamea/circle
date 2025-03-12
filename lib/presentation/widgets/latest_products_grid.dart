@@ -5,7 +5,7 @@ import '../../data/models/home/latest_products/latest_products_model.dart';
 import '../views/details/details_view.dart';
 import 'latest_products_grid_item.dart';
 
-class LatestProductsGrid<T> extends StatelessWidget {
+class LatestProductsGrid extends StatelessWidget {
   final List<LatestProductsModel> latestProductsModel;
   const LatestProductsGrid({super.key, required this.latestProductsModel});
 

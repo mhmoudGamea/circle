@@ -3,6 +3,7 @@ import 'package:circle/presentation/providers/categories/category_provider.dart'
 import 'package:circle/presentation/providers/home/home_provider.dart';
 import 'package:circle/presentation/providers/login/login_provider.dart';
 import 'package:circle/presentation/providers/main/main_provider.dart';
+import 'package:circle/presentation/providers/modify_account/modify_account_provider.dart';
 import 'package:circle/presentation/providers/otp/otp_provider.dart';
 import 'package:circle/presentation/providers/products/products_provider.dart';
 import 'package:circle/presentation/providers/profile/profile_provider.dart';
@@ -24,7 +25,8 @@ class GenerateMultiProviders extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => getIt<LoginProvider>()),
         ChangeNotifierProvider(create: (_) => getIt<OtpProvider>()),
         ChangeNotifierProvider(create: (_) => getIt<SignupProvider>()),
-        ChangeNotifierProvider(create: (_) => getIt<MainProvider>()),
+        ChangeNotifierProvider(
+            create: (_) => getIt<MainProvider>()..loadUserData()),
         ChangeNotifierProvider(create: (_) => getIt<ProfileProvider>()),
         ChangeNotifierProvider(
           create: (_) => getIt<HomeProvider>()
@@ -40,6 +42,7 @@ class GenerateMultiProviders extends StatelessWidget {
             ..getLatestProducts(),
         ),
         ChangeNotifierProvider(create: (_) => getIt<DetailsProvider>()),
+        ChangeNotifierProvider(create: (_) => getIt<ModifyAccountProvider>()),
       ],
       child: child,
     );

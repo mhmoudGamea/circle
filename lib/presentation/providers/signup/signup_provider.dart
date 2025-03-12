@@ -1,61 +1,22 @@
-import 'dart:io';
-
+import 'package:circle/presentation/providers/main/main_provider.dart';
+import 'package:circle/presentation/views/main/main_view.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 
-import '../../../core/services/image_picker_service.dart';
 import '../../../core/constants/constants.dart';
+import '../../../core/services/image_picker_service.dart';
 import '../../../core/models/base_sigup_model.dart';
 import '../../../core/navigator/navigator.dart';
 import '../../../core/services/prefs.dart';
 import '../../../core/utils/helper.dart';
 import '../../../data/repositories/signup_repository.dart';
-import '../../views/login/login_view.dart';
+import '../mixins/pick_image_mixin.dart';
 
-class SignupProvider extends ImagePickerService with ChangeNotifier {
+class SignupProvider extends ImagePickerService
+    with ChangeNotifier, PickImageMixin {
   final SignupRepository signupRepository;
+  final MainProvider mainProvider;
 
-  SignupProvider(this.signupRepository);
-  // form
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-  GlobalKey<FormState> get formKey => _formKey;
-
-  AutovalidateMode _autovalidateMode = AutovalidateMode.disabled;
-
-  AutovalidateMode get autovalidateMode => _autovalidateMode;
-
-  // image picker
-  final ImagePicker _picker = ImagePicker();
-
-  File? _pickedImage;
-
-  @override
-  File? get pickedImage => _pickedImage;
-
-  @override
-  Future<void> pickImage() async {
-    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-    if (image != null) {
-      _pickedImage = File(image.path);
-      notifyListeners();
-    }
-  }
-
-  // first name controller
-
-  final TextEditingController _firstNameEditingController =
-      TextEditingController();
-
-  TextEditingController get firstNameEditingController =>
-      _firstNameEditingController;
-  // last name controller
-
-  final TextEditingController _lastNameEditingController =
-      TextEditingController();
-
-  TextEditingController get lastNameEditingController =>
-      _lastNameEditingController;
+  SignupProvider(this.signupRepository, this.mainProvider);
 
   // city drop down menu
   static final List<String> _cities = [
@@ -84,31 +45,22 @@ class SignupProvider extends ImagePickerService with ChangeNotifier {
     notifyListeners();
   }
 
-  // validate
-  bool validate() {
-    if (_formKey.currentState!.validate()) {
-      _formKey.currentState!.save();
-      return true;
-    } else {
-      _autovalidateMode = AutovalidateMode.always;
-      return false;
-    }
-  }
+  bool _signupLoading = false;
 
-  bool _loginLoading = false;
-
-  bool get loginLoading => _loginLoading;
+  bool get signupLoading => _signupLoading;
 
   // signup user
   Future<void> signupUser(
       {required BuildContext context,
+      required String firstName,
+      required String lastName,
       required String phone,
       required String phoneCode}) async {
-    _loginLoading = true;
+    _signupLoading = true;
     notifyListeners();
     BaseSignupModel baseSignupModel = BaseSignupModel(
-      firstName: _firstNameEditingController.text,
-      lastName: _lastNameEditingController.text,
+      firstName: firstName,
+      lastName: lastName,
       phoneNumber: phone,
       phoneCode: phoneCode,
       cityId: '1',
@@ -116,19 +68,26 @@ class SignupProvider extends ImagePickerService with ChangeNotifier {
     final result =
         await signupRepository.signupUser(baseSignupModel: baseSignupModel);
     result.fold((fail) {
-      _loginLoading = false;
+      _signupLoading = false;
       notifyListeners();
       // show error snackbar he need to register
       Helper.errorMessage(context, message: fail.message);
-    }, (success) {
-      _loginLoading = false;
+    }, (success) async {
+      _signupLoading = false;
       notifyListeners();
-      Prefs.set(Constants.image, _pickedImage?.path ?? '');
-      Prefs.set(Constants.firstName, _firstNameEditingController.text);
-      Prefs.set(Constants.lastName, _lastNameEditingController.text);
-      NavigatorHandler.push(LoginView());
+      await Prefs.set(Constants.phoneCode, phoneCode);
+      await Prefs.set(Constants.phoneNumber, phone);
+      mainProvider
+        ..saveAtSharedPrefs(
+          firstName: firstName,
+          lastName: lastName,
+          image: pickedImage?.path,
+        )
+        ..loadUserData();
+
+      NavigatorHandler.pushReplacement(MainView());
       // show success snackbar
-      Helper.errorMessage(context, message: 'Success to create Account');
+      Helper.successMessage(context, message: 'تم تسجيل الدخول بنجاح');
     });
   }
 }

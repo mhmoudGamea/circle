@@ -1,5 +1,5 @@
 import 'package:circle/core/extensions/num_extensions.dart';
-import 'package:circle/core/services/image_picker_service.dart';
+import 'package:circle/presentation/providers/mixins/pick_image_mixin.dart';
 import 'package:circle/presentation/widgets/custom_svg_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -8,7 +8,7 @@ import '../../core/app_theme/app_colors.dart';
 import 'custom_bordered_container.dart';
 import 'custom_cart_logo.dart';
 
-class CustomAvatarImage<T extends ImagePickerService> extends StatelessWidget {
+class CustomAvatarImage<T extends PickImageMixin> extends StatelessWidget {
   final String icon;
   final Color iconBgColor;
   final Alignment iconAlignment;

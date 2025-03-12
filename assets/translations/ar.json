@@ -79,6 +79,7 @@
         "appBarTitle": "تعديل الحساب",
         "textFieldFirstName": "الاسم الاول",
         "textFieldLastName": "الاسم الاخير",
+        "textFieldRequired": "هذا الحقل مطلوب",
         "buttonTitle": "تأكيد"
     },
     "products": {

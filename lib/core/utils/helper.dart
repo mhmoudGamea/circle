@@ -93,7 +93,7 @@ abstract class Helper {
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
           height: 80,
           decoration: BoxDecoration(
-            color: AppColors.primaryColor,
+            color: const Color.fromARGB(255, 23, 151, 25),
             borderRadius: const BorderRadius.all(Radius.circular(8)),
           ),
           child: Row(

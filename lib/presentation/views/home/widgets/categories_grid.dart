@@ -1,8 +1,11 @@
-import 'package:circle/data/models/home/categories/categories_model.dart';
-import 'package:circle/presentation/providers/categories/category_provider.dart';
-import 'package:circle/presentation/views/home/widgets/categories_grid_item.dart';
+import 'package:circle/presentation/providers/products/products_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../../../core/navigator/navigator.dart';
+import '../../../../data/models/home/categories/categories_model.dart';
+import '../../products/products_view.dart';
+import 'categories_grid_item.dart';
 
 class CategoriesGrid extends StatelessWidget {
   final List<CategoriesModel> categoriesModel;
@@ -10,7 +13,7 @@ class CategoriesGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<CategoryProvider>(context, listen: false);
+    final provider = Provider.of<ProductsProvider>(context, listen: false);
     return SliverGrid.builder(
       itemCount: categoriesModel.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -21,7 +24,9 @@ class CategoriesGrid extends StatelessWidget {
       ),
       itemBuilder: (context, index) => InkWell(
         onTap: () {
-          provider.changeGridItemIndex(index);
+          // provider.changeGridItemIndex(index);
+          provider.setSelectedCategoryIndex(index);
+          NavigatorHandler.push(ProductsView());
         },
         child: CategoriesGridItem(
             image: categoriesModel[index].image!,

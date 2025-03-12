@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:circle/core/extensions/num_extensions.dart';
 import 'package:circle/core/utils/helper.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -41,7 +43,7 @@ class CustomTextForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: height ?? 56.h,
+      height: height ?? 90.h,
       alignment: Alignment.center,
       decoration: BoxDecoration(
           color: bgColor ?? Colors.transparent,
@@ -55,6 +57,15 @@ class CustomTextForm extends StatelessWidget {
           border: Helper.inputBorder(isUnderline: isUnderline),
           enabledBorder: Helper.inputBorder(isUnderline: isUnderline),
           focusedBorder: Helper.inputBorder(isUnderline: isUnderline),
+          errorBorder: Helper.inputBorder(
+            isUnderline: isUnderline,
+            borderColor: AppColors.primaryColor,
+          ),
+          focusedErrorBorder: Helper.inputBorder(
+            isUnderline: isUnderline,
+            borderColor: AppColors.primaryColor,
+          ),
+          errorStyle: TextStyle(height: 0.5),
           label: label == null
               ? null
               : Align(

@@ -1,51 +1,57 @@
 import 'package:circle/core/extensions/num_extensions.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-import '../../../providers/signup/signup_provider.dart';
 import '../../../widgets/custom_text_form.dart';
 
 class CustomFirstLastName extends StatelessWidget {
-  const CustomFirstLastName({super.key});
+  final TextEditingController firstNameEditingController;
+  final TextEditingController lastNameEditingController;
+  final String firstNameLabel;
+  final String lastNameLabel;
+  final String firstNameRequired;
+  final String lastNameRequired;
+  const CustomFirstLastName(
+      {super.key,
+      required this.firstNameEditingController,
+      required this.lastNameEditingController,
+      required this.firstNameLabel,
+      required this.lastNameLabel,
+      required this.firstNameRequired,
+      required this.lastNameRequired});
 
   @override
   Widget build(BuildContext context) {
-    final signupProvider = Provider.of<SignupProvider>(context, listen: false);
-    return Form(
-      key: signupProvider.formKey,
-      autovalidateMode: signupProvider.autovalidateMode,
-      child: Row(
-        children: [
-          Expanded(
-            child: CustomTextForm(
-              label: 'signup.textFieldFirstName',
-              controller: signupProvider.firstNameEditingController,
-              height: 70.h,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'signup.textFieldRequired'.tr();
-                }
-                return null;
-              },
-            ),
+    return Row(
+      children: [
+        Expanded(
+          child: CustomTextForm(
+            label: firstNameLabel.tr(),
+            controller: firstNameEditingController,
+            height: 90.h,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return firstNameRequired.tr();
+              }
+              return null;
+            },
           ),
-          SizedBox(width: 8),
-          Expanded(
-            child: CustomTextForm(
-              label: 'signup.textFieldLastName',
-              controller: signupProvider.lastNameEditingController,
-              height: 70.h,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'signup.textFieldRequired'.tr();
-                }
-                return null;
-              },
-            ),
+        ),
+        SizedBox(width: 8),
+        Expanded(
+          child: CustomTextForm(
+            label: lastNameLabel.tr(),
+            controller: lastNameEditingController,
+            height: 90.h,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return lastNameRequired.tr();
+              }
+              return null;
+            },
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

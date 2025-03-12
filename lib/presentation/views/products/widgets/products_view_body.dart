@@ -56,11 +56,16 @@ class ProductsViewBody extends StatelessWidget {
                         Padding(
                           padding: EdgeInsets.symmetric(
                               horizontal: Dimens.padding_16h),
-                          child: CustomHorizontalSubCategoryList(
-                            subCategoryList: value.isEmpty
-                                ? CategoriesModel.dummySubCategory()
-                                : value[provider.selectedCategoryIndex]
-                                    .subCategories!,
+                          child: Selector<ProductsProvider, int>(
+                            selector: (_, provider) =>
+                                provider.selectedCategoryIndex,
+                            builder: (_, value, child) =>
+                                CustomHorizontalSubCategoryList(
+                              subCategoryList:
+                                  provider.categoriesModelList.isEmpty
+                                      ? CategoriesModel.dummySubCategory()
+                                      : provider.getSelectedSubCategories(),
+                            ),
                           ),
                         ),
                       ],

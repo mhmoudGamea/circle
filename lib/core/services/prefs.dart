@@ -6,7 +6,8 @@ class Prefs {
 
   static String? get(String key) => prefs.getString(key);
 
-  static set(String key, String value) => prefs.setString(key, value);
+  static Future<bool> set(String key, String value) async =>
+      await prefs.setString(key, value);
 
   static isExist(String key) => prefs.containsKey(key);
 

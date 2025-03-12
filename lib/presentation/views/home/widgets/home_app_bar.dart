@@ -1,13 +1,15 @@
+import 'dart:developer';
+
 import 'package:circle/core/app_theme/app_colors.dart';
 import 'package:circle/core/extensions/num_extensions.dart';
-import 'package:circle/core/services/prefs.dart';
+import 'package:circle/presentation/providers/main/main_provider.dart';
 import 'package:circle/presentation/widgets/custom_cart_logo.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../core/config/app_styles.dart';
-import '../../../../core/constants/constants.dart';
 import 'home_app_bar_action_icon.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -50,9 +52,16 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                 'home.appBar.welcome'.tr(),
                 style: AppStyles.r14.copyWith(color: AppColors.gray),
               ),
-              Text(
-                '${Prefs.get(Constants.firstName)} ${Prefs.get(Constants.lastName)}',
-                style: AppStyles.b16,
+              Consumer<MainProvider>(
+                builder: (context, provider, child) {
+                  log(provider.firstName);
+                  log(provider.lastName);
+
+                  return Text(
+                    '${provider.firstName} ${provider.lastName}',
+                    style: AppStyles.b16,
+                  );
+                },
               ),
             ],
           )

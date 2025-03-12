@@ -1,5 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
+import '../../../core/constants/constants.dart';
+import '../../../core/services/prefs.dart';
 import '../../views/categories/category_view.dart';
 import '../../views/home/home_view.dart';
 import '../../views/profile/profile_view.dart';
@@ -33,5 +37,32 @@ class MainProvider extends ChangeNotifier {
     } else {
       return 'profile.appBarTitle';
     }
+  }
+
+  /// method to save user data to shared prefs
+  Future<void> saveAtSharedPrefs(
+      {required String firstName,
+      required String lastName,
+      String? image}) async {
+    await Prefs.set(Constants.image, image ?? '');
+    await Prefs.set(Constants.firstName, firstName);
+    await Prefs.set(Constants.lastName, lastName);
+    image = image ?? '';
+    firstName = firstName;
+    lastName = lastName;
+    notifyListeners();
+  }
+
+  /// method to load user data from shared prefs
+  String image = '';
+  String firstName = '';
+  String lastName = '';
+  void loadUserData() {
+    image = Prefs.get(Constants.image) ?? '';
+    firstName = Prefs.get(Constants.firstName) ?? '';
+    lastName = Prefs.get(Constants.lastName) ?? '';
+    log('called loadUserData *********************first = $firstName *******************last = $lastName ****************************************************');
+
+    notifyListeners();
   }
 }

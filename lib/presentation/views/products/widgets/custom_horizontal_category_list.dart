@@ -29,8 +29,11 @@ class CustomHorizontalCategoryList extends StatelessWidget {
               onTap: () {
                 context.read<ProductsProvider>().getSubCategories();
               },
-              child: Center(
-                child: Text("الكل"),
+              child: CustomHorizontalCategoryListItem(
+                title: 'الكل',
+                isSelected:
+                    context.watch<ProductsProvider>().selectedCategoryIndex ==
+                        -1,
               ),
             );
           }

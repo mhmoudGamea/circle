@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 
 import '../../../core/app_theme/app_colors.dart';
 import '../../../core/constants/constants.dart';
+import '../../providers/main/main_provider.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
@@ -32,7 +33,12 @@ class ProfileView extends StatelessWidget {
                   avatarBorderColor: AppColors.primaryColor,
                 ),
                 SizedBox(height: 12),
-                Text('profile.name'.tr(), style: AppStyles.b18),
+                Consumer<MainProvider>(
+                  builder: (context, provider, child) => Text(
+                    '${provider.firstName} ${provider.lastName}',
+                    style: AppStyles.b16,
+                  ),
+                ),
                 SizedBox(height: 28),
                 CustomTopCover(),
                 SizedBox(height: 16),

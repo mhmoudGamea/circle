@@ -5,14 +5,11 @@ import 'package:flutter/material.dart';
 import '../../../../core/app_theme/app_colors.dart';
 
 class CustomHorizontalCategoryListItem extends StatelessWidget {
-  final String image;
+  final String? image;
   final String title;
   final bool isSelected;
   const CustomHorizontalCategoryListItem(
-      {super.key,
-      required this.image,
-      required this.title,
-      this.isSelected = false});
+      {super.key, this.image, required this.title, this.isSelected = false});
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +26,11 @@ class CustomHorizontalCategoryListItem extends StatelessWidget {
       child: Row(
         spacing: 10,
         children: [
-          CachedNetworkImage(
-              imageUrl: image,
-              placeholder: (context, url) => Helper.shimmerLoading()),
+          if (image != null)
+            CachedNetworkImage(
+              imageUrl: image!,
+              placeholder: (context, url) => Helper.shimmerLoading(),
+            ),
           Text(title),
         ],
       ),
