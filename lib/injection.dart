@@ -1,6 +1,6 @@
 import 'package:circle/data/datasource/remote/dio/dio_client.dart';
 import 'package:circle/data/repositories/base_category_repository_impl.dart';
-import 'package:circle/data/repositories/base_latest_products_repository_impl.dart';
+import 'package:circle/data/repositories/base_product_repository_impl.dart';
 import 'package:circle/data/repositories/category_repository.dart';
 import 'package:circle/data/repositories/home_repository.dart';
 import 'package:circle/data/repositories/login_repository.dart';
@@ -8,7 +8,7 @@ import 'package:circle/data/repositories/modify_account_repository.dart';
 import 'package:circle/data/repositories/product_repository.dart';
 import 'package:circle/data/repositories/signup_repository.dart';
 import 'package:circle/domain/repositories/base_category_repository.dart';
-import 'package:circle/domain/repositories/base_latest_products_repository.dart';
+import 'package:circle/domain/repositories/base_product_repository.dart';
 import 'package:circle/presentation/providers/categories/category_provider.dart';
 import 'package:circle/presentation/providers/details/details_provider.dart';
 import 'package:circle/presentation/providers/home/home_provider.dart';
@@ -41,21 +41,21 @@ Future<void> init() async {
   // base category , base latest products, modify account
   getIt.registerLazySingleton<BaseCategoryRepository>(
       () => BaseCategoryRepositoryImpl(dioClient: getIt<DioClient>()));
-  getIt.registerLazySingleton<BaseLatestProductsRepository>(
-      () => BaseLatestProductsRepositoryImpl(dioClient: getIt<DioClient>()));
+  getIt.registerLazySingleton<BaseProductRepository>(
+      () => BaseProductRepositoryImpl(dioClient: getIt<DioClient>()));
   getIt.registerLazySingleton<ModifyAccountRepository>(
       () => ModifyAccountRepository(dioClient: getIt<DioClient>()));
   // home and categories
   getIt.registerLazySingleton(() => HomeRepository(
         baseCategoryRepository: getIt<BaseCategoryRepository>(),
-        baseLatestProductsRepository: getIt<BaseLatestProductsRepository>(),
+        baseProductsRepository: getIt<BaseProductRepository>(),
       ));
   getIt.registerLazySingleton(() => CategoryRepository(
         baseCategoryRepository: getIt<BaseCategoryRepository>(),
       ));
   getIt.registerLazySingleton(() => ProductRepository(
         baseCategoryRepository: getIt<BaseCategoryRepository>(),
-        baseLatestProductsRepository: getIt<BaseLatestProductsRepository>(),
+        baseProductsRepository: getIt<BaseProductRepository>(),
       ));
 
   ///app providers

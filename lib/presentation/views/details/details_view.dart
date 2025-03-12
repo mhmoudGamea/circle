@@ -1,15 +1,15 @@
+import 'package:circle/data/models/home/latest_products/product_model.dart';
 import 'package:circle/presentation/providers/details/details_provider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../data/models/home/latest_products/latest_products_model.dart';
 import '../../widgets/custom_app_bar.dart';
 import 'widgets/details_view_body.dart';
 
 class DetailsView extends StatefulWidget {
-  final LatestProductsModel latestProductsModel;
-  const DetailsView({super.key, required this.latestProductsModel});
+  final ProductModel productModel;
+  const DetailsView({super.key, required this.productModel});
 
   @override
   State<DetailsView> createState() => _DetailsViewState();
@@ -27,7 +27,7 @@ class _DetailsViewState extends State<DetailsView> {
       if (mounted) {
         context
             .read<DetailsProvider>()
-            .getTotlaPrice(price: widget.latestProductsModel.price);
+            .getTotlaPrice(price: widget.productModel.price);
       }
     });
   }
@@ -40,7 +40,7 @@ class _DetailsViewState extends State<DetailsView> {
         title: 'details.appBarTitle'.tr(),
       ),
       body: DetailsViewBody(
-        latestProductsModel: widget.latestProductsModel,
+        productModel: widget.productModel,
       ),
     );
   }

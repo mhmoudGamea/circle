@@ -23,10 +23,22 @@ class MainView extends StatelessWidget {
                 title: provider.appBarTitle().tr(),
                 showBackArrow: false,
               ),
-        body: SafeArea(
-          child: IndexedStack(
-            index: provider.currentIndex,
-            children: provider.views,
+        body: WillPopScope(
+          onWillPop: () {
+            if (provider.currentIndex == 1 || provider.currentIndex == 2) {
+              log(provider.currentIndex.toString());
+              provider.changeIndex(0);
+              log('must pop');
+              log(provider.currentIndex.toString());
+              return Future.value(false);
+            }
+            return Future.value(true);
+          },
+          child: SafeArea(
+            child: IndexedStack(
+              index: provider.currentIndex,
+              children: provider.views,
+            ),
           ),
         ),
         bottomNavigationBar: CustomBottomNavBar(),

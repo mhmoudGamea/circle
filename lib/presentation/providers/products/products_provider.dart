@@ -1,12 +1,12 @@
 import 'dart:developer';
 
 import 'package:circle/data/models/home/categories/categories_model.dart';
+import 'package:circle/presentation/providers/mixins/product_mixin.dart';
 import 'package:flutter/material.dart';
 
 import '../mixins/category_mixin.dart';
-import '../mixins/latest_product_mixin.dart';
 
-class ProductsProvider with ChangeNotifier, CategoryMixin, LatestProductMixin {
+class ProductsProvider with ChangeNotifier, CategoryMixin, ProductMixin {
   // select item from category
   int _selectedCategoryIndex = -1;
   int get selectedCategoryIndex => _selectedCategoryIndex;

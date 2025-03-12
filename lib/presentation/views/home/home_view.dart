@@ -1,11 +1,3 @@
-import 'package:circle/presentation/providers/home/home_provider.dart';
-import 'package:circle/presentation/providers/main/main_provider.dart';
-import 'package:circle/presentation/providers/profile/profile_provider.dart';
-import 'package:circle/presentation/views/home/widgets/categories_grid.dart';
-import 'package:circle/presentation/widgets/latest_products_grid.dart';
-import 'package:circle/presentation/views/products/products_view.dart';
-import 'package:circle/presentation/widgets/custom_carousel_slider.dart';
-import 'package:circle/presentation/widgets/custom_header.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -14,7 +6,16 @@ import 'package:skeletonizer/skeletonizer.dart';
 import '../../../core/dimens/dimens.dart';
 import '../../../core/navigator/navigator.dart';
 import '../../../data/models/home/categories/categories_model.dart';
-import '../../../data/models/home/latest_products/latest_products_model.dart';
+import '../../../data/models/home/latest_products/product_model.dart';
+import '../../providers/home/home_provider.dart';
+import '../../providers/main/main_provider.dart';
+import '../../providers/products/products_provider.dart';
+import '../../providers/profile/profile_provider.dart';
+import '../../widgets/custom_carousel_slider.dart';
+import '../../widgets/custom_header.dart';
+import '../../widgets/product_grid.dart';
+import '../products/products_view.dart';
+import 'widgets/categories_grid.dart';
 import 'widgets/city_search_bar.dart';
 import 'widgets/home_app_bar.dart';
 
@@ -69,6 +70,9 @@ class HomeView extends StatelessWidget {
                     leading: 'home.offers.title'.tr(),
                     trailing: 'home.offers.viewAll'.tr(),
                     trailingOnTap: () {
+                      context
+                          .read<ProductsProvider>()
+                          .setSelectedCategoryIndex(-1);
                       NavigatorHandler.push(ProductsView());
                     },
                   ),
@@ -77,13 +81,13 @@ class HomeView extends StatelessWidget {
               ),
             ),
             // latest products grid view
-            Selector<HomeProvider, List<LatestProductsModel>>(
+            Selector<HomeProvider, List<ProductModel>>(
               selector: (_, provider) => provider.latestProductsModelList,
               builder: (context, value, child) => Skeletonizer.sliver(
                 enabled: value.isEmpty,
-                child: LatestProductsGrid(
-                  latestProductsModel: value.isEmpty
-                      ? LatestProductsModel.dummyLatestProducts()
+                child: ProductGrid(
+                  productModel: value.isEmpty
+                      ? ProductModel.dummyLatestProducts()
                       : value,
                 ),
               ),

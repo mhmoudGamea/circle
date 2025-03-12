@@ -1,6 +1,7 @@
 import 'package:circle/core/app_theme/app_colors.dart';
 import 'package:circle/core/config/app_styles.dart';
 import 'package:circle/core/extensions/num_extensions.dart';
+import 'package:circle/data/models/home/latest_products/product_model.dart';
 import 'package:circle/presentation/widgets/custom_bordered_container.dart';
 import 'package:circle/presentation/widgets/custom_fav_icon.dart';
 import 'package:circle/presentation/widgets/custom_svg_icon.dart';
@@ -8,11 +9,10 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 import '../../core/utils/helper.dart';
-import '../../data/models/home/latest_products/latest_products_model.dart';
 
-class LatestProductsGridItem extends StatelessWidget {
-  final LatestProductsModel latestProductsModel;
-  const LatestProductsGridItem({super.key, required this.latestProductsModel});
+class ProductGridItem extends StatelessWidget {
+  final ProductModel productModel;
+  const ProductGridItem({super.key, required this.productModel});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class LatestProductsGridItem extends StatelessWidget {
                 height: 120,
                 width: double.infinity,
                 child: CachedNetworkImage(
-                  imageUrl: latestProductsModel.image,
+                  imageUrl: productModel.image,
                   placeholder: (context, url) => Helper.shimmerLoading(),
                 ),
               ),
@@ -36,7 +36,7 @@ class LatestProductsGridItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CustomFavIcon(onTap: () {}),
-                  if (latestProductsModel.isOffer)
+                  if (productModel.isOffer)
                     CustomBorderedContainer(
                       bg: AppColors.primaryColor,
                       borderRadius: 6,
@@ -45,7 +45,7 @@ class LatestProductsGridItem extends StatelessWidget {
                       padding: 4,
                       borderColor: Colors.transparent,
                       child: FittedBox(
-                        child: Text('% ${latestProductsModel.offerValue}',
+                        child: Text('% ${productModel.offerValue}',
                             style:
                                 AppStyles.b16.copyWith(color: AppColors.white)),
                       ),
@@ -55,7 +55,7 @@ class LatestProductsGridItem extends StatelessWidget {
             ],
           ),
           Spacer(),
-          Text(latestProductsModel.title,
+          Text(productModel.title,
               style: AppStyles.r14,
               maxLines: 1,
               overflow: TextOverflow.ellipsis),
@@ -65,17 +65,17 @@ class LatestProductsGridItem extends StatelessWidget {
             children: [
               Flexible(
                 child: FittedBox(
-                  child: Text('${latestProductsModel.price} ج.م',
-                      style: AppStyles.b14),
+                  child:
+                      Text('${productModel.price} ج.م', style: AppStyles.b14),
                 ),
               ),
-              if (latestProductsModel.price != latestProductsModel.oldPrice)
+              if (productModel.price != productModel.oldPrice)
                 SizedBox(width: 4),
-              if (latestProductsModel.price != latestProductsModel.oldPrice)
+              if (productModel.price != productModel.oldPrice)
                 Flexible(
                   child: FittedBox(
                     child: Text(
-                      '${latestProductsModel.oldPrice} ج.م',
+                      '${productModel.oldPrice} ج.م',
                       style: AppStyles.b12.copyWith(
                           decoration: TextDecoration.lineThrough,
                           color: AppColors.favIconColor),

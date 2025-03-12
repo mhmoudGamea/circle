@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../mixins/category_mixin.dart';
-import '../mixins/latest_product_mixin.dart';
+import '../mixins/product_mixin.dart';
 
-class HomeProvider with ChangeNotifier, CategoryMixin, LatestProductMixin {
+class HomeProvider with ChangeNotifier, CategoryMixin, ProductMixin {
   // city drop down menu
   static final List<String> _cities = [
     'dropDownCity.city0',

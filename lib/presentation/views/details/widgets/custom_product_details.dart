@@ -1,5 +1,6 @@
 import 'package:circle/core/config/app_styles.dart';
 import 'package:circle/core/extensions/num_extensions.dart';
+import 'package:circle/data/models/home/latest_products/product_model.dart';
 import 'package:circle/presentation/providers/details/details_provider.dart';
 import 'package:circle/presentation/views/details/widgets/custom_price_currency.dart';
 import 'package:circle/presentation/widgets/custom_bordered_container.dart';
@@ -9,12 +10,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/app_theme/app_colors.dart';
-import '../../../../data/models/home/latest_products/latest_products_model.dart';
 import '../../../widgets/custom_fav_icon.dart';
 
 class CustomProductDetails extends StatelessWidget {
-  final LatestProductsModel latestProductsModel;
-  const CustomProductDetails({super.key, required this.latestProductsModel});
+  final ProductModel productModel;
+  const CustomProductDetails({super.key, required this.productModel});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class CustomProductDetails extends StatelessWidget {
         Row(
           children: [
             Text(
-              latestProductsModel.title,
+              productModel.title,
               style: AppStyles.b18.copyWith(color: AppColors.primaryColor),
             ),
             Spacer(),
@@ -35,7 +35,7 @@ class CustomProductDetails extends StatelessWidget {
         ),
         SizedBox(height: 16),
         Text(
-          latestProductsModel.details,
+          productModel.details,
           style: AppStyles.b12.copyWith(color: AppColors.gray),
         ),
         SizedBox(height: 12),
@@ -58,7 +58,7 @@ class CustomProductDetails extends StatelessWidget {
                     ),
                     Spacer(),
                     CustomPriceCurrency(
-                      price: latestProductsModel.price.toString(),
+                      price: productModel.price.toString(),
                       priceColor: AppColors.primaryColor,
                       currencyColor: AppColors.primaryColor,
                     ),
@@ -73,7 +73,7 @@ class CustomProductDetails extends StatelessWidget {
                     onTap: () {
                       context
                           .read<DetailsProvider>()
-                          .decreaseQuantity(latestProductsModel.price);
+                          .decreaseQuantity(productModel.price);
                     },
                     child: CustomSvgIcon(
                         assetName: 'decrease', width: 22.w, height: 22.w),
@@ -95,7 +95,7 @@ class CustomProductDetails extends StatelessWidget {
                     onTap: () {
                       context
                           .read<DetailsProvider>()
-                          .increaseQuantity(latestProductsModel.price);
+                          .increaseQuantity(productModel.price);
                     },
                     child: CustomSvgIcon(
                         assetName: 'increase', width: 22.w, height: 22.w),
