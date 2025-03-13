@@ -30,6 +30,11 @@ class ProductGridItem extends StatelessWidget {
                 child: CachedNetworkImage(
                   imageUrl: productModel.image,
                   placeholder: (context, url) => Helper.shimmerLoading(),
+                  errorWidget: (context, url, error) => Icon(
+                    Icons.dangerous_rounded,
+                    color: AppColors.primaryColor,
+                    size: 40,
+                  ),
                 ),
               ),
               Row(

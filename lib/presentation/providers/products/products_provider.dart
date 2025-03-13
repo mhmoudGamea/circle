@@ -20,7 +20,7 @@ class ProductsProvider with ChangeNotifier, CategoryMixin, ProductMixin {
   int _selectedSubCategoryIndex = -1;
   int get selectedSubCategoryIndex => _selectedSubCategoryIndex;
 
-  void setSelectedLatestProductIndex(int index) {
+  void setSelectedSubCategoryIndex(int index) {
     _selectedSubCategoryIndex = index;
     notifyListeners();
   }
@@ -46,8 +46,6 @@ class ProductsProvider with ChangeNotifier, CategoryMixin, ProductMixin {
     return subCategories;
   }
 
-  /// method to return either getSubCategories() method or subCategories from categoriesModelList list
-  /// based on the value of _selectedCategoryIndex
   List<CategoriesModel> getSelectedSubCategories() {
     return _selectedCategoryIndex == -1
         ? getSubCategories()

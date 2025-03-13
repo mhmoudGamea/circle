@@ -13,7 +13,7 @@ import '../../providers/products/products_provider.dart';
 import '../../providers/profile/profile_provider.dart';
 import '../../widgets/custom_carousel_slider.dart';
 import '../../widgets/custom_header.dart';
-import '../../widgets/product_grid.dart';
+import '../../widgets/sliver_product_grid.dart';
 import '../products/products_view.dart';
 import 'widgets/categories_grid.dart';
 import 'widgets/city_search_bar.dart';
@@ -24,6 +24,8 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final productsProvider =
+        Provider.of<ProductsProvider>(context, listen: false);
     return Selector<ProfileProvider, bool>(
       selector: (_, provider) => provider.languageChanged,
       builder: (context, value, child) => Padding(
@@ -69,10 +71,10 @@ class HomeView extends StatelessWidget {
                   CustomHeader(
                     leading: 'home.offers.title'.tr(),
                     trailing: 'home.offers.viewAll'.tr(),
-                    trailingOnTap: () {
-                      context
-                          .read<ProductsProvider>()
-                          .setSelectedCategoryIndex(-1);
+                    trailingOnTap: () async {
+                      productsProvider.setSelectedCategoryIndex(-1);
+                      productsProvider.setSelectedSubCategoryIndex(-1);
+                      await productsProvider.getProduct();
                       NavigatorHandler.push(ProductsView());
                     },
                   ),
@@ -85,7 +87,7 @@ class HomeView extends StatelessWidget {
               selector: (_, provider) => provider.latestProductsModelList,
               builder: (context, value, child) => Skeletonizer.sliver(
                 enabled: value.isEmpty,
-                child: ProductGrid(
+                child: SliverProductGrid(
                   productModel: value.isEmpty
                       ? ProductModel.dummyLatestProducts()
                       : value,

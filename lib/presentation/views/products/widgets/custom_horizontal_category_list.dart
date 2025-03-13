@@ -13,6 +13,8 @@ class CustomHorizontalCategoryList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final productProvider =
+        Provider.of<ProductsProvider>(context, listen: false);
     return CustomBorderedContainer(
       bg: AppColors.navRailBackgroundButtonColor,
       borderColor: Colors.transparent,
@@ -40,9 +42,11 @@ class CustomHorizontalCategoryList extends StatelessWidget {
           final realIndex = index - 1;
           return InkWell(
             onTap: () {
-              context
-                  .read<ProductsProvider>()
-                  .setSelectedCategoryIndex(realIndex);
+              productProvider.getProduct(
+                  categoryId: '${categoriesModelList[realIndex].id}');
+              // just for border red color of selected category and sub category
+              productProvider.setSelectedSubCategoryIndex(-1);
+              productProvider.setSelectedCategoryIndex(realIndex);
             },
             child: CustomHorizontalCategoryListItem(
               image: categoriesModelList[realIndex].image!,

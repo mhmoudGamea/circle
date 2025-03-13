@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:circle/presentation/providers/products/products_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -25,10 +23,10 @@ class CategoriesGrid extends StatelessWidget {
         childAspectRatio: 0.72,
       ),
       itemBuilder: (context, index) => InkWell(
-        onTap: () {
-          log('taaaaaaaaaaaaaaaaaaaaaaaaaaaaaap');
+        onTap: () async {
           provider.setSelectedCategoryIndex(index);
-          provider.setSelectedLatestProductIndex(-1);
+          provider.setSelectedSubCategoryIndex(-1);
+          await provider.getProduct(categoryId: '${categoriesModel[index].id}');
           NavigatorHandler.push(ProductsView());
         },
         child: CategoriesGridItem(

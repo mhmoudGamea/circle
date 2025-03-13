@@ -54,6 +54,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
               ),
               Consumer<MainProvider>(
                 builder: (context, provider, child) {
+                  log('in home app bar class');
                   log(provider.firstName);
                   log(provider.lastName);
 

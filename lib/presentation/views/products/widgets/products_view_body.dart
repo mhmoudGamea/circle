@@ -11,9 +11,9 @@ import '../../../../data/models/home/latest_products/product_model.dart';
 import '../../../providers/products/products_provider.dart';
 import '../../../widgets/custom_svg_icon.dart';
 import '../../../widgets/custom_text_form.dart';
-import '../../../widgets/product_grid.dart';
 import 'custom_horizontal_category_list.dart';
 import 'custom_horizontal_sub_category_list.dart';
+import 'products_grid.dart';
 
 class ProductsViewBody extends StatelessWidget {
   const ProductsViewBody({super.key});
@@ -21,63 +21,64 @@ class ProductsViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<ProductsProvider>(context);
-    return CustomScrollView(
-      slivers: [
-        SliverToBoxAdapter(
-          child: Column(
-            children: [
-              SizedBox(height: 16),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: Dimens.padding_16h),
-                child: CustomTextForm(
-                  controller: TextEditingController(),
-                  height: 70.h,
-                  hint: 'home.searchField'.tr(),
-                  prefix:
-                      CustomSvgIcon(assetName: 'search', width: 20, height: 20),
-                  isFill: true,
-                  fillColor: AppColors.inputBackground,
+    return Column(
+      children: [
+        SizedBox(height: 16),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: Dimens.padding_16h),
+          child: CustomTextForm(
+            controller: TextEditingController(),
+            height: 70.h,
+            hint: 'home.searchField'.tr(),
+            prefix: CustomSvgIcon(assetName: 'search', width: 20, height: 20),
+            isFill: true,
+            fillColor: AppColors.inputBackground,
+          ),
+        ),
+        SizedBox(height: 8),
+        // in this CustomHorizontalCategoryList
+        Selector<ProductsProvider, List<CategoriesModel>>(
+          selector: (_, provider) => provider.categoriesModelList,
+          builder: (context, value, child) => Skeletonizer(
+            enabled: value.isEmpty,
+            child: Column(
+              children: [
+                CustomHorizontalCategoryList(
+                  categoriesModelList:
+                      value.isEmpty ? CategoriesModel.dummyCategory() : value,
+                ),
+                SizedBox(height: 8),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: Dimens.padding_16h),
+                  child: Selector<ProductsProvider, int>(
+                    selector: (_, provider) => provider.selectedCategoryIndex,
+                    builder: (_, value, child) =>
+                        CustomHorizontalSubCategoryList(
+                      subCategoryList: provider.categoriesModelList.isEmpty
+                          ? CategoriesModel.dummySubCategory()
+                          : provider.getSelectedSubCategories(),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        Expanded(
+          child: Selector<ProductsProvider, List<ProductModel>>(
+            selector: (_, provider) => provider.productList,
+            builder: (context, value, child) => Skeletonizer(
+              enabled: value.isEmpty,
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
+                child: ProductGrid(
+                  productModel: value.isEmpty
+                      ? ProductModel.dummyLatestProducts()
+                      : value,
                 ),
               ),
-              SizedBox(height: 8),
-              // in this CustomHorizontalCategoryList
-              Selector<ProductsProvider, List<CategoriesModel>>(
-                selector: (_, provider) => provider.categoriesModelList,
-                builder: (context, value, child) => Skeletonizer(
-                    enabled: value.isEmpty,
-                    child: Column(
-                      children: [
-                        CustomHorizontalCategoryList(
-                          categoriesModelList: value.isEmpty
-                              ? CategoriesModel.dummyCategory()
-                              : value,
-                        ),
-                        SizedBox(height: 8),
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: Dimens.padding_16h),
-                          child: Selector<ProductsProvider, int>(
-                            selector: (_, provider) =>
-                                provider.selectedCategoryIndex,
-                            builder: (_, value, child) =>
-                                CustomHorizontalSubCategoryList(
-                              subCategoryList:
-                                  provider.categoriesModelList.isEmpty
-                                      ? CategoriesModel.dummySubCategory()
-                                      : provider.getSelectedSubCategories(),
-                            ),
-                          ),
-                        ),
-                      ],
-                    )),
-              ),
-              SizedBox(height: 16),
-              ElevatedButton(
-                  onPressed: () {
-                    provider.getProduct(categoryId: '44');
-                  },
-                  child: Text('click')),
-            ],
+            ),
           ),
         ),
       ],

@@ -12,6 +12,7 @@ class CustomHorizontalSubCategoryList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final productsProvider = Provider.of<ProductsProvider>(context);
     return Container(
       width: double.infinity,
       height: 40,
@@ -23,9 +24,13 @@ class CustomHorizontalSubCategoryList extends StatelessWidget {
         separatorBuilder: (context, index) => SizedBox(width: 8),
         itemBuilder: (context, index) => InkWell(
           onTap: () {
-            context
-                .read<ProductsProvider>()
-                .setSelectedLatestProductIndex(index);
+            productsProvider.getProduct(
+              categoryId: productsProvider.selectedCategoryIndex == -1
+                  ? null
+                  : '${productsProvider.categoriesModelList[productsProvider.selectedCategoryIndex].categoryId}',
+              subCategoryId: '${subCategoryList[index].id}',
+            );
+            productsProvider.setSelectedSubCategoryIndex(index);
           },
           child: CustomHorizontalSubCategoryListItem(
             title: subCategoryList[index].title!,

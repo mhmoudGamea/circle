@@ -41,7 +41,6 @@ class BaseProductRepositoryImpl implements BaseProductRepository {
         'category_id': categoryId,
         'sub_category_id': subCategoryId,
       });
-      log(response.data['data']);
       return right(
           ProductModel.getLatestProductsFromList(list: response.data['data']));
     } on ApiFailure catch (error) {

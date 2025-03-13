@@ -5,9 +5,9 @@ import '../../data/models/home/latest_products/product_model.dart';
 import '../views/details/details_view.dart';
 import 'product_grid_item.dart';
 
-class ProductGrid extends StatelessWidget {
+class SliverProductGrid extends StatelessWidget {
   final List<ProductModel> productModel;
-  const ProductGrid({super.key, required this.productModel});
+  const SliverProductGrid({super.key, required this.productModel});
 
   @override
   Widget build(BuildContext context) {
