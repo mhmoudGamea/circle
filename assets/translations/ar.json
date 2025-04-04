@@ -91,5 +91,11 @@
         "total": "الاجمالي",
         "currency": "ج.م",
         "basketButton": "اضافة للسلة"
+    },
+    "cart": {
+        "appBarTitle": "السلة",
+        "total": "الاجمالي",
+        "currency": "ج.م",
+        "basketButton": "اطلب الآن"
     }
 }

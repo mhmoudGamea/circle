@@ -90,5 +90,11 @@
         "total": "Total",
         "currency": "EGP",
         "basketButton": "Add to Basket"
+    },
+    "cart": {
+        "appBarTitle": "Cart",
+        "total": "Total",
+        "currency": "EGP",
+        "basketButton": "Order Now"
     }
 }

@@ -9,11 +9,12 @@ class CustomPriceCurrency extends StatelessWidget {
   final String? price;
   final Color priceColor;
   final Color currencyColor;
-  const CustomPriceCurrency(
-      {super.key,
-      this.price,
-      required this.priceColor,
-      required this.currencyColor});
+  const CustomPriceCurrency({
+    super.key,
+    this.price,
+    required this.priceColor,
+    required this.currencyColor,
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -30,8 +30,9 @@ class CategoriesGrid extends StatelessWidget {
           NavigatorHandler.push(ProductsView());
         },
         child: CategoriesGridItem(
-            image: categoriesModel[index].image!,
-            title: categoriesModel[index].title!),
+          image: categoriesModel[index].image!,
+          title: categoriesModel[index].title!,
+        ),
       ),
     );
   }

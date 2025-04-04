@@ -2,7 +2,7 @@ import 'package:circle/data/models/home/latest_products/product_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/dimens/dimens.dart';
-import 'custom_price_add_cart_button.dart';
+import '../../../widgets/custom_total_price_button.dart';
 import 'custom_product_details.dart';
 import 'custom_product_image.dart';
 
@@ -31,7 +31,7 @@ class DetailsViewBody extends StatelessWidget {
             ),
           ),
         ),
-        CustomPriceAddCartButton(),
+        CustomTotalPriceButton(),
       ],
     );
   }

@@ -1,13 +1,15 @@
 import 'package:circle/core/extensions/num_extensions.dart';
+import 'package:circle/core/navigator/navigator.dart';
+import 'package:circle/presentation/views/cart/cart_view.dart';
 import 'package:circle/presentation/widgets/custom_icon_button.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../core/app_theme/app_colors.dart';
-import 'custom_price_currency.dart';
+import '../../core/app_theme/app_colors.dart';
+import '../views/details/widgets/custom_price_currency.dart';
 
-class CustomPriceAddCartButton extends StatelessWidget {
-  const CustomPriceAddCartButton({super.key});
+class CustomTotalPriceButton extends StatelessWidget {
+  const CustomTotalPriceButton({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +39,9 @@ class CustomPriceAddCartButton extends StatelessWidget {
           ),
           Spacer(),
           CustomIconButton(
-            onTap: () {},
+            onTap: () {
+              NavigatorHandler.push(CartView());
+            },
             borderRadius: 16,
             width: 150,
             height: 56,
