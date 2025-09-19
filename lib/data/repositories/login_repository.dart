@@ -12,7 +12,7 @@ class LoginRepository {
   LoginRepository({required this.dioClient});
   Future<Either<FailureModel, LoginModel>> loginUser(
       {required String phoneCode, required String phoneNumber}) async {
-    late Response response;
+    Response? response;
     try {
       final formData =
           BaseLoginModel(phoneCode: phoneCode, phoneNumber: phoneNumber);
@@ -22,7 +22,7 @@ class LoginRepository {
       );
       return Right(LoginModel.fromJson(response.data));
     } catch (error) {
-      return Left(FailureModel.fromJson(response.data));
+      return Left(FailureModel.fromJson(response?.data));
     }
   }
 }
